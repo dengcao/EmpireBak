@@ -1,6 +1,6 @@
 # 帝国备份王(EmpireBak)：稳定、高效、兼容的MYSQL数据库备份系统
 
-最新版本：6.0
+## 最新版本：6.0
 
 ## 帝国备份王(EmpireBak)简介
 
@@ -96,6 +96,6 @@
 26. 默认关闭执行SQL和替换文件模块。（可在配置文件里开启）
 
 
-## 开源作者：王猛
-## 官方网站：http://www.phome.net/EmpireBak/
+### 开源作者：王猛
+### 官方网站：http://www.phome.net/EmpireBak/
  
