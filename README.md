@@ -314,6 +314,6 @@ EBMA系统下载地址：[http://ebak.phome.net](http://ebak.phome.net)
 
 
 
-### 开源作者：王猛
+### 开源作者：phome.net（帝国CMS）
 ### 官方网站：http://www.phome.net/EmpireBak/
  
