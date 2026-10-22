@@ -22,7 +22,7 @@ if(!defined('InEmpireBak'))
           <td bgcolor="#FFFFFF"><table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#DBEAF5">
               <tr bgcolor="#FFFFFF"> 
                 <td height="25"> <div align="left">登錄者:&nbsp;<b> 
-                    <?=$loginin?>
+                    <?=RepPostStr($loginin,1)?>
                     </b></div></td>
               </tr>
             </table></td>
@@ -34,8 +34,7 @@ if(!defined('InEmpireBak'))
         <table width="98%" border="0" align="center" cellpadding="3" cellspacing="1" class="tableborder">
           <tr>             
           <td height="38" bgcolor="#FFFFFF">
-<div align="center"><a href="http://www.phome.net/ecms72/" target="_blank"><strong><font color="#0000FF" size="3">帝國網站管理系統全面開源 
-              － 最安全、最穩定的開源CMS系統</font></strong></a></div></td>
+<div align="center"><a href="http://www.phome.net" target="_blank"><img src="images/bannercms.gif" border="0"></a></div></td>
           </tr>
         </table>
       </td>
@@ -47,7 +46,7 @@ if(!defined('InEmpireBak'))
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td width="50%" height="16"><strong><font color="#FFFFFF">帝國備份王(EmpireBak)版權聲明</font></strong></td>
-                <td><div align="right"><strong><a href="http://ebak.phome.net" target="_blank"><font color="#FFFFFF">EBMA系統官方網站</font></a></strong></div></td>
+                <td><div align="right"><strong><a href="http://www.phome.net/EmpireBak/ebma/" target="_blank"><font color="#FFFFFF">EBMA系統官方網站</font></a></strong></div></td>
               </tr>
             </table></td>
         </tr>
@@ -84,7 +83,7 @@ if(!defined('InEmpireBak'))
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td width="50%" height="16"><strong><a href="phpinfo.php" target="_blank"><font color="#FFFFFF">系統信息</font></a></strong></td>
-                <td><div align="right"><strong><a href="http://www.phome.net/edown25/" target="_blank"><font color="#FFFFFF">帝國下載系統</font></a></strong></div></td>
+                <td><div align="right"><strong><a href="http://www.phome.net" target="_blank"><font color="#FFFFFF">帝國CMS系統</font></a></strong></div></td>
               </tr>
             </table></td>
         </tr>
@@ -121,7 +120,7 @@ if(!defined('InEmpireBak'))
               </tr>
               <tr bgcolor="#FFFFFF"> 
                 <td height="25">程序版本&nbsp;&nbsp;: <a href="http://www.phome.net" target="_blank"><strong><font color="#07519A">EmpireBak</font></strong> 
-                  <font color="#FF9900"><strong>5.1</strong></font></a> <font color="#666666">[開源版]</font></td>
+                  <font color="#FF9900"><strong>6.0</strong></font></a> <font color="#666666">[開源版]</font></td>
                 <td height="25">安全模式&nbsp;&nbsp;: 
                   <?=EGInfo_GetPHPSafemod()?'PHP運行於安全模式':'正常模式'?>
                 </td>
@@ -141,27 +140,33 @@ if(!defined('InEmpireBak'))
         <tr> 
           <td bgcolor="#FFFFFF"><table width="100%" border="0" cellpadding="3" cellspacing="1">
               <tr bgcolor="#FFFFFF"> 
-                <td height="25">官方主頁: <a href="http://www.phome.net" target="_blank">http://www.phome.net</a></td>
+                <td width="25%" height="25">版權所有:</td>
+                <td width="58%"><a href="http://www.phome.net" target="_blank">漳州市薌城帝興軟件開發有限公司</a></td>
               </tr>
               <tr bgcolor="#FFFFFF"> 
-                <td height="25">官方論壇: <a href="http://bbs.phome.net" target="_blank">http://bbs.phome.net</a></td>
-              </tr>
-              <tr bgcolor="#FFFFFF"> 
-                <td height="25">公司網站：<a href="http://www.digod.com" target="_blank">http://www.digod.com</a></td>
-              </tr>
-              <tr bgcolor="#FFFFFF"> 
-                <td height="25">帝國產品：<a href="http://www.phome.net/product" target="_blank">http://www.phome.net/product</a></td>
+                <td height="25">帝國備份王官方網站:</td>
+                <td height="25"><a href="http://www.phome.net/EmpireBak/" target="_blank">http://www.phome.net/EmpireBak/</a></td>
               </tr>
             </table></td>
-          <td width="60%" height="125" valign="top" bgcolor="#FFFFFF">
-<IFRAME frameBorder="0" name="getinfo" scrolling="no" src="ginfo.php" style="HEIGHT:100%;VISIBILITY:inherit;WIDTH:100%;Z-INDEX:2"></IFRAME></td>
+          <td width="60%" bgcolor="#FFFFFF"><table width="100%" border="0" cellpadding="3" cellspacing="1">
+            <tr bgcolor="#FFFFFF">
+              <td height="25">帝國CMS官網:</td>
+              <td height="25"><a href="http://www.phome.net" target="_blank">http://www.phome.net</a></td>
+            </tr>
+
+            <tr bgcolor="#FFFFFF">
+              <td width="25%" height="25">EBMA系統官網:</td>
+              <td width="75%" height="25"><a href="http://www.phome.net/EmpireBak/ebma/" target="_blank">http://www.phome.net/EmpireBak/ebma/</a></td>
+            </tr>
+
+          </table></td>
         </tr>
       </table></td>
   </tr>
   <tr> 
     <td height="32" valign="bottom"> 
       <div align="center">Powered by <a href="http://www.phome.net" target="_blank"><strong><font color="#07519A">EmpireBak</font></strong> 
-        <font color="#FF9900"><strong>5.1</strong></font></a></div></td>
+        <font color="#FF9900"><strong>6.0</strong></font></a></div></td>
   </tr>
 </table>
 </body>

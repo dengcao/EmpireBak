@@ -53,26 +53,26 @@ function ChangeAutoField(f)
   <?php
   while($r=$empire->fetch($sql))
   {
-	$r[Field]="<a href='#ebak' onclick=\"ChangeAutoField('".$r[Field]."');\" title='加入去除自增值字段列表'>$r[Field]</a>";
+	$r['Field']="<a href='#ebak' onclick=\"ChangeAutoField('".$r['Field']."');\" title='加入去除自增值字段列表'>".$r['Field']."</a>";
   ?>
   <tr bgcolor="#FFFFFF"> 
     <td height="27"> <div align="center">
-        <?=$r[Field]?>
+        <?=$r['Field']?>
       </div></td>
     <td> <div align="center">
-        <?=$r[Type]?>
+        <?=$r['Type']?>
       </div></td>
     <td> <div align="center">
-        <?=$r[Key]?>
+        <?=$r['Key']?>
       </div></td>
     <td> <div align="center">
         <?=$r['Default']?>
       </div></td>
     <td> <div align="center">
-        <?=$r[Extra]?>
+        <?=$r['Extra']?>
       </div></td>
   </tr>
-  <?
+  <?php
   }
   ?>
 </table>

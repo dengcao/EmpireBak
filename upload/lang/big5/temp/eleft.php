@@ -68,7 +68,7 @@ if($ebak_set_moredbserver)
     <td height="27" bgcolor="#FFFFFF" onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#DBEAF5'"><div align="center"><a href="doc.html" target="ebakmain">說明文檔</a></div></td>
   </tr>
   <tr>
-    <td height="27" bgcolor="#FFFFFF" onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#DBEAF5'"><div align="center"><a href="http://bbs.phome.net" target="_blank">技術支持</a></div></td>
+    <td height="27" bgcolor="#FFFFFF" onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#DBEAF5'"><div align="center"><a href="http://www.phome.net/support/" target="_blank">技術支持</a></div></td>
   </tr>
 </table>
 <br>

@@ -54,7 +54,7 @@ document.all("frmTitle").style.display=""
             <td width="35%" bgcolor="C7D4F7"> 
               <div align="right">
                 »y¨¥¡G
-                  <select name="select" onchange="parent.location.href='phome.php?phome=ChangeLanguage&from=admin.php&l='+this.value;" style="width:300">
+                  <select name="select" onchange="parent.location.href='ebakdoaction.php?phome=ChangeLanguage&from=admin.php&l='+this.value;" style="width:300">
                   <?=Ebak_ReturnLang()?>
                 </select>&nbsp;&nbsp;
             </div></td>

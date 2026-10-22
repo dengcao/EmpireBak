@@ -44,7 +44,7 @@ function DoDrop(dbname)
     <td>位置：備份數據 -&gt; <a href="ChangeDb.php">選擇數據庫</a></td>
   </tr>
   <tr>
-    <td height="25"><div align="center">備份步驟：<font color="#FF0000">選擇數據庫</font> 
+    <td height="25"><div align="center"><strong>備份步驟：</strong><font color="#FF0000">選擇數據庫</font> 
         -&gt; 選擇要備份的表 -&gt; 開始備份 -&gt; 完成</div></td>
   </tr>
 </table>
@@ -76,7 +76,7 @@ function DoDrop(dbname)
   ?>
   <tr bgcolor="<?=$bgcolor?>"> 
     <td height="25"> 
-      <div align="center"><strong><?=$r[0]?></strong></div></td>
+      <div align="center"><a href="ChangeTable.php?mydbname=<?=$r[0]?>"><strong><?=$r[0]?></strong></a></div></td>
     <td height="25"> 
       <div align="center"> 
         <input type="button" name="Submit" value="備份數據" onclick="self.location.href='ChangeTable.php?mydbname=<?=$r[0]?>';">

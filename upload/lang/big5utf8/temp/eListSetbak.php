@@ -31,11 +31,11 @@ function ChangeSet(filename)
 <body>
 <table width="100%" border="0" align="center" cellpadding="3" cellspacing="1">
   <tr> 
-    <td>位置：<a href="ListSetbak.php">管理備份設置</a>&nbsp;(存放目錄：<b>setsave</b>)</td>
+    <td>位置：<a href="ListSetbak.php">管理備份設置</a>&nbsp;(存放目錄：<b><?=$baksetsavepath?></b>)</td>
   </tr>
 </table>
 <br>
-<table width="500" border="0" cellpadding="3" cellspacing="1" class="tableborder">
+<table width="600" border="0" cellpadding="3" cellspacing="1" class="tableborder">
   <tr class="header"> 
     <td width="63%" height="25"> <div align="center">保存設置文件名<?=$onclickword?></div></td>
     <td width="37%"><div align="center">操作</div></td>
@@ -43,7 +43,7 @@ function ChangeSet(filename)
   <?php
   while($file=@readdir($hand))
   {
-  	if($file!="."&&$file!=".."&&$file!="index.html"&&is_file("setsave/".$file))
+  	if($file!="."&&$file!=".."&&$file!="index.html"&&is_file($baksetsavepath."/".$file))
 	{
 		if($change==1)
 		{

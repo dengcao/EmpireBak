@@ -13,11 +13,14 @@ if(empty($mydbname)||empty($mytbname))
 {
 	printerror("ErrorUrl","history.go(-1)");
 }
-$form=$_GET['form'];
+$form=RepPostVar($_GET['form']);
 if(empty($form))
 {
 	$form='ebakchangetb';
 }
+Ebak_DoCkStrType(4,$mydbname,1);
+Ebak_DoCkStrType(4,$mytbname,1);
+eCheckStrType(5,$form,1);
 $usql=$empire->query("use `$mydbname`");
 $sql=$empire->query("SHOW FIELDS FROM `".$mytbname."`");
 require LoadAdminTemp('eListField.php');

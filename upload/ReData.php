@@ -6,13 +6,16 @@ $loginin=$lur['username'];
 $rnd=$lur['rnd'];
 $link=db_connect();
 $empire=new mysqlquery();
-$mypath=$_GET['mypath'];
-$mydbname=$_GET['mydbname'];
+$mypath=ehtmlspecialchars($_GET['mypath']);
+$mydbname=ehtmlspecialchars($_GET['mydbname']);
 $selectdbname=$phome_db_dbname;
 if($mydbname)
 {
 	$selectdbname=$mydbname;
 }
+eCheckStrType(5,$mypath,1);
+Ebak_DoCkStrType(4,$mydbname,1);
+Ebak_DoCkStrType(4,$selectdbname,1);
 $db='';
 if($canlistdb)
 {

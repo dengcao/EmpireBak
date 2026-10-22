@@ -56,8 +56,8 @@ function ChangePath(pathname)
   <tr bgcolor="#FFFFFF"> 
     <td height="25"> <div align="left"><img src="images/dir.gif" width="19" height="15">&nbsp; 
         <?=$showfile?> </div></td>
-    <td height="25"> <div align="center"> [<a href="<? echo $bakpath."/".$file."/readme.txt"?>" target=_blank>查看備份說明</a>]</div></td>
-    <td><div align="center">[<a href="#ebak" onclick="window.open('phome.php?phome=DoZip&p=<?=$file?>&change=<?=$change?>','','width=350,height=160');">打包並下載</a>]&nbsp;&nbsp;[<a href="RepFiletext.php?mypath=<?=$file?>">替換文件內容</a>]&nbsp;&nbsp;[<a href="phome.php?phome=DelBakpath&path=<?=$file?>&change=<?=$change?>" onclick="return confirm('確認要刪除？');">刪除目錄</a>]</div></td>
+    <td height="25"> <div align="center"> [<a href="<?php echo $bakpath."/".$file."/readme.txt"?>" target=_blank>查看備份說明</a>]</div></td>
+    <td><div align="center">[<a href="#ebak" onclick="window.open('phome.php?phome=DoZip&p=<?=$file?>&change=<?=$change?>','','width=450,height=320');">打包並下載</a>]&nbsp; &nbsp;[<a href="RepFiletext.php?mypath=<?=$file?>">替換文件內容</a>]&nbsp; &nbsp;[<a href="phome.php?phome=DelBakpath&path=<?=$file?>&change=<?=$change?>" onclick="return confirm('確認要刪除？');">刪除目錄</a>]</div></td>
   </tr>
   <?
      }

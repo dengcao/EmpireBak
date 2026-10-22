@@ -7,7 +7,8 @@ if(PHP_VERSION<'5.3.0')
 
 define('InEmpireBak',TRUE);
 define('EBAK_PATH',substr(dirname(__FILE__),0,-5));
-define('MAGIC_QUOTES_GPC',function_exists('get_magic_quotes_gpc')&&@get_magic_quotes_gpc());
+define('MAGIC_QUOTES_GPC',function_exists('ini_get')&&ini_get('magic_quotes_gpc'));
+define('STR_IREPLACE',function_exists('str_ireplace'));
 
 $php_outtime=0;
 $editor=0;
@@ -34,6 +35,47 @@ $message_r=array();
 $ebak_ebma_open=0;
 $ebak_ebma_path='';
 $ebak_ebma_cklogin=0;
+$set_username='';
+$set_password='';
+$set_loginauth='';
+$set_loginrnd='';
+$set_outtime=0;
+$set_loginkey='1';
+$ebak_set_keytime=0;
+$ebak_set_ckuseragent='';
+$ebak_set_loginurlcsvar='';
+$ebak_set_loginurlcsval='';
+$ebak_set_filerndtime=0;
+$ebak_set_filerndctime=0;
+$phome_cookiedomain='';
+$phome_cookiepath='';
+$phome_cookievarpre='';
+$bakpath='';
+$bakzippath='';
+$baksetsavepath='';
+$filechmod='1';
+$phpsafemod='';
+$limittype='';
+$canlistdb='';
+$ebak_set_hidedbs='';
+$ebak_set_escapetype='1';
+$ebak_set_ckrndvar='';
+$ebak_set_ckrndval='';
+$ebak_set_ckrndvaltwo='';
+$ebak_set_ckrndvalthree='';
+$ebak_set_ckrndvalfour='';
+$ebak_set_ckrndvalfive='';
+$ebak_set_ckrndvalsix='';
+$ebak_set_hclosemods='';
+$ebak_set_webdebug=0;
+$ebak_set_ckstrtype=0;
+$ebak_set_timezone='';
+$ebak_set_dbtbtype=2;
+$public_r=array();
+$dbcharr=array();
+$loginin='';
+$rnd='';
+
 
 Ebak_CheckCloseEbakSys();
 
@@ -41,6 +83,16 @@ require_once EBAK_PATH.'lang/dbchar.php';
 require_once EBAK_PATH.'class/config.php';
 
 if(!defined('EmpireBakConfig'))
+{
+	exit();
+}
+
+if($ebak_set_webdebug==0)
+{
+	error_reporting(0);
+}
+
+if(!$set_username||!$set_password||!$ebak_set_ckrndvar||!$ebak_set_ckrndval)
 {
 	exit();
 }
@@ -53,6 +105,19 @@ if($php_outtime)
 	$php_outtime=(int)$php_outtime;
 	@set_time_limit($php_outtime);
 }
+
+//timezone
+if($ebak_set_timezone)
+{
+	if(function_exists('date_default_timezone_set'))
+	{
+		@date_default_timezone_set($ebak_set_timezone);
+	}
+}
+
+//char
+eCheckStrType(5,$ebaklang,1);
+eCheckStrType(5,$ebaklangchar,1);
 
 //Database
 $defphome_db_dbtype=$phome_db_dbtype;
@@ -74,7 +139,7 @@ if(empty($phome_db_dbtype))
 	}
 }
 
-if($phome_db_dbtype=='mysqli')
+if($phome_db_dbtype=='mysqli'||PHP_VERSION>='7.0.0')
 {
 	include(EBAK_PATH.'class/db_sqli.php');
 }
@@ -140,7 +205,19 @@ function Ebak_ReturnMysqlVer($dbver){
 	{
 		return '';
 	}
-	if($dbver>='6.0')
+	if($dbver>='9.0')
+	{
+		$dbver='9.0';
+	}
+	elseif($dbver>='8.0')
+	{
+		$dbver='8.0';
+	}
+	elseif($dbver>='7.0')
+	{
+		$dbver='7.0';
+	}
+	elseif($dbver>='6.0')
 	{
 		$dbver='6.0';
 	}
@@ -188,10 +265,46 @@ function LoadLang($file){
 
 //参数处理函数
 function RepPostVar($val){
+	$val=CkPostStrIsArray($val);
 	$val=str_replace(" ","",$val);
 	$val=str_replace("'","",$val);
 	$val=str_replace("\"","",$val);
+	$val=str_replace("`","",$val);
+	$val=RepPostStr($val,0);
 	$val=addslashes(stripSlashes($val));
+	return $val;
+}
+
+//处理提交字符
+function RepPostStr($val,$isurl=0){
+	$val=CkPostStrIsArray($val);
+	$val=ehtmlspecialchars($val,ENT_QUOTES);
+	if($isurl==1)
+	{
+		$val=str_replace('&amp;','&',$val);
+	}
+	return $val;
+}
+
+//htmlspecialchars处理
+function ehtmlspecialchars($val,$flags=ENT_COMPAT){
+	global $ebaklangchar;
+	if(PHP_VERSION>='5.4.0')
+	{
+		if($ebaklangchar=='utf-8')
+		{
+			$char='UTF-8';
+		}
+		else
+		{
+			$char='ISO-8859-1';
+		}
+		$val=htmlspecialchars($val,$flags,$char);
+	}
+	else
+	{
+		$val=htmlspecialchars($val,$flags);
+	}
 	return $val;
 }
 
@@ -219,8 +332,8 @@ function ReturnUseEbakLang(){
 	}
 	else
 	{
-		$r['lang']='gb';
-		$r['langchar']='gbk';
+		$r['lang']='gbutf8';
+		$r['langchar']='utf-8';
 	}
 	return $r;
 }
@@ -427,6 +540,32 @@ function Ebak_eReturnDomain(){
 
 //验证是否使用https
 function Ebak_eCheckUseHttps(){
+	if(!empty($_SERVER['HTTPS'])&&strtolower($_SERVER['HTTPS'])!=='off')
+	{
+		return 1;
+	}
+	elseif(isset($_SERVER['HTTP_X_FORWARDED_PROTO'])&&strtolower($_SERVER['HTTP_X_FORWARDED_PROTO'])==='https')
+	{
+        return 1;
+    }
+	elseif(!empty($_SERVER['HTTP_FRONT_END_HTTPS'])&&strtolower($_SERVER['HTTP_FRONT_END_HTTPS'])!=='off')
+	{
+        return 1;
+    }
+	else
+	{
+		return 0;
+	}
+}
+
+//验证是否使用https
+function Ebak_eReturnHttpsQz(){
+	$http=Ebak_eCheckUseHttps()==1?'https://':'http://';
+	return $http;
+}
+
+//验证是否使用https
+function Ebak_eCheckUseHttpsPort(){
 	if($_SERVER['SERVER_PORT']==443)
 	{
 		return 1;
@@ -443,4 +582,217 @@ function Ebak_ReturnFourCheckRnd(){
 	$fourcheck=md5($ebak_set_ckrndvalfour.'!E-b-A-k!'.$set_username);
 	return $fourcheck;
 }
+
+
+//验证后台是否关闭相关模块
+function Ebak_ehCheckCloseMods($mod){
+	global $ebak_set_hclosemods;
+	if(stristr($ebak_set_hclosemods,','.$mod.','))
+	{
+		echo $mod.' is close';
+		exit();
+	}
+}
+
+//验证数组
+function CkPostStrIsArray($val,$ecms=0){
+	if(is_array($val))
+	{
+		if($ecms==0)
+		{
+			return 'array';
+		}
+		exit();
+	}
+	return $val;
+}
+
+//返回验证空数组
+function eCheckEmptyArray($ecr){
+	if(isset($ecr))
+	{
+		if(is_array($ecr))
+		{
+			return $ecr;
+		}
+	}
+	$emptyarray=array();
+	return $emptyarray;
+}
+
+//checkstrtype
+function eCheckStrType($type,$str,$doing=0,$canb=0){
+	$ret=0;
+	if($canb==1)
+	{
+		$str=str_replace(' ','',$str);
+	}
+	if($str=='')
+	{
+		return 1;
+	}
+	if($type==1)//数字
+	{
+		if(preg_match('/^[0-9]+$/',$str))
+		{
+			$ret=1;
+		}
+	}
+	elseif($type==2)//字母
+	{
+		if(preg_match('/^[A-Za-z]+$/',$str))
+		{
+			$ret=1;
+		}
+	}
+	elseif($type==3)//字母+数字
+	{
+		if(preg_match('/^[A-Za-z0-9]+$/',$str))
+		{
+			$ret=1;
+		}
+	}
+	elseif($type==4)//字母+数字+下划线
+	{
+		if(preg_match('/^[A-Za-z0-9_]+$/',$str))
+		{
+			$ret=1;
+		}
+	}
+	elseif($type==5)//字母+数字+下划线+点
+	{
+		if(preg_match('/^[A-Za-z0-9\-\._]+$/',$str))
+		{
+			$ret=1;
+		}
+	}
+	elseif($type==6)//数字点
+	{
+		if(preg_match('/^[0-9\.]+$/',$str))
+		{
+			$ret=1;
+		}
+	}
+	elseif($type==7)//文件地址
+	{
+		if(preg_match('/^[A-Za-z0-9\-\.\/_:]+$/',$str))
+		{
+			$ret=1;
+		}
+	}
+	elseif($type==8)//网页地址
+	{
+		if(preg_match('/^[A-Za-z0-9\-\?\.\/_:&=]+$/',$str))
+		{
+			$ret=1;
+		}
+	}
+	elseif($type==9)//mail
+	{
+		if(preg_match('/^[A-Za-z0-9\-\._@]+$/',$str))
+		{
+			$ret=1;
+		}
+	}
+	elseif($type==10)//path
+	{
+		if(preg_match('/^[A-Za-z0-9\-\/_]+$/',$str))
+		{
+			$ret=1;
+		}
+	}
+	elseif($type==11)//file
+	{
+		if(preg_match('/^[A-Za-z0-9\-\.\/_]+$/',$str))
+		{
+			$ret=1;
+		}
+	}
+	elseif($type==12)//url
+	{
+		if(preg_match('/^[A-Za-z0-9\-\?\.\/_:&%,#!=]+$/',$str))
+		{
+			$ret=1;
+		}
+	}
+	elseif($type==13)//spechar1
+	{
+		if(preg_match('/^["\'\$\*\/<>\\#%&]+$/',$str))
+		{
+			$ret=1;
+		}
+	}
+	elseif($type==14)//spechar2
+	{
+		if(preg_match('/^["\'\$\/<>\\%]+$/',$str))
+		{
+			$ret=1;
+		}
+	}
+	elseif($type==15)//spechar3
+	{
+		if(preg_match('/^["\$\'\\]+$/',$str))
+		{
+			$ret=1;
+		}
+	}
+	elseif($type==16)//spechar4
+	{
+		if(preg_match('/^["\'\\]+$/',$str))
+		{
+			$ret=1;
+		}
+	}
+	elseif($type==17)//ip
+	{
+		if(preg_match('/^[A-Za-z0-9\.:]+$/',$str))
+		{
+			$ret=1;
+		}
+	}
+	elseif($type==18)//逗号+数字
+	{
+		if(preg_match('/^[0-9,]+$/',$str))
+		{
+			$ret=1;
+		}
+	}
+	else
+	{
+		$ret=0;
+	}
+	if($doing)
+	{
+		if($ret<1)
+		{
+			exit();
+		}
+	}
+	return $ret;
+}
+
+//字符类型处理
+function Ebak_DoCkStrType($type,$str,$doing=0,$canb=0){
+	global $ebak_set_ckstrtype;
+	if($ebak_set_ckstrtype==1)
+	{
+		return 1;
+	}
+	return eCheckStrType($type,$str,$doing,$canb);
+}
+
+//随机数字
+function Ebak_RandInt($min=0,$max=0,$ecms=0){
+	mt_srand();
+	if($max)
+	{
+		$rnd=mt_rand($min,$max);
+	}
+	else
+	{
+		$rnd=mt_rand();
+	}
+	return $rnd;
+}
+
 ?>

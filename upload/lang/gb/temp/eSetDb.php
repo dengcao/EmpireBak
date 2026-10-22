@@ -250,22 +250,22 @@ function EbakCheckForm(obj){
 <br>
 <table width="100%" border="0" align="center" cellpadding="3" cellspacing="1" class="tableborder">
   <tr bgcolor="#FFFFFF"> 
-    <td width="18%" height="23" id="setdbbg" onmouseover="ChangeSet('setdb');" bgcolor="#DBEAF5"> 
+    <td width="18%" height="23" id="setdbbg" onMouseOver="ChangeSet('setdb');" bgcolor="#DBEAF5"> 
       <div align="center"><strong><a href="#ebak">数据库设置</a></strong></div></td>
-    <td width="18%" id="setuserbg" onmouseover="ChangeSet('setuser');"> 
+    <td width="18%" id="setuserbg" onMouseOver="ChangeSet('setuser');"> 
       <div align="center"><strong><a href="#ebak">管理员设置</a></strong></div></td>
-    <td width="16%" id="setckbg" onmouseover="ChangeSet('setck');"> 
+    <td width="16%" id="setckbg" onMouseOver="ChangeSet('setck');"> 
       <div align="center"><strong><a href="#ebak">COOKIE设置</a></strong></div></td>
-	<td width="16%" id="setmdbsbg" onmouseover="ChangeSet('setmdbs');"> 
+	<td width="16%" id="setmdbsbg" onMouseOver="ChangeSet('setmdbs');"> 
       <div align="center"><strong><a href="#ebak">多服务器设置</a></strong></div></td>
-	<td width="16%" id="setebmabg" onmouseover="ChangeSet('setebma');"<?=$haveebma==0?' style="display:none"':''?>> 
+	<td width="16%" id="setebmabg" onMouseOver="ChangeSet('setebma');"<?=$haveebma==0?' style="display:none"':''?>> 
       <div align="center"><strong><a href="#ebak">EBMA设置</a></strong></div></td>
-    <td width="16%" id="setotherbg" onmouseover="ChangeSet('setother');"> 
+    <td width="16%" id="setotherbg" onMouseOver="ChangeSet('setother');"> 
       <div align="center"><strong><a href="#ebak">其它设置</a></strong></div></td>
   </tr>
 </table>
 
-<form name="form1" method="post" action="phome.php" onsubmit="return EbakCheckForm(document.form1);">
+<form name="form1" method="post" action="phome.php" onSubmit="return EbakCheckForm(document.form1);">
   <table width="100%" border="0" cellpadding="3" cellspacing="1" class="tableborder" id="setdb">
     <tr class="header"> 
       <td height="25" colspan="2">数据库设置 
@@ -302,7 +302,7 @@ function EbakCheckForm(obj){
           <input type="radio" name="mysqlver" id="mysqlver" value="4.0"<?=$phome_db_ver=='4.0'?' checked':''?>>
           MYSQL 4.0.*/3.*&nbsp;&nbsp; 
           <input type="radio" name="mysqlver" id="mysqlver" value="auto"<?=$phome_db_ver==''?' checked':''?>>
-          自动选择</p></td>
+          自动识别</p></td>
     </tr>
     <tr> 
       <td width="24%" height="25" bgcolor="#FFFFFF"><strong>数据库服务器</strong></td>
@@ -338,7 +338,7 @@ function EbakCheckForm(obj){
       <td height="25" bgcolor="#FFFFFF">默认编码</td>
       <td height="25" bgcolor="#FFFFFF"><input name="dbchar" type="text" id="dbchar" value="<?=$phome_db_char?>"> 
         <font color="#666666"> 
-        <select name="selectchar" onchange="document.form1.dbchar.value=this.value">
+        <select name="selectchar" onChange="document.form1.dbchar.value=this.value">
           <option value="">选择</option>
           <?php
 				echo Ebak_ReturnDbCharList('');
@@ -348,7 +348,7 @@ function EbakCheckForm(obj){
     </tr>
     <tr>
       <td height="25" bgcolor="#FFFFFF">&nbsp;</td>
-      <td height="25" bgcolor="#FFFFFF"><strong>[<a href="#empirebak" onclick="EbakCheckDefDbServer();">测试数据库信息</a>]</strong>&nbsp;&nbsp;<font color="#666666">(填写数据库参数后，可以点击测试上面的参数是否正确)</font></td>
+      <td height="25" bgcolor="#FFFFFF"><strong>[<a href="#empirebak" onClick="EbakCheckDefDbServer();">测试数据库信息</a>]</strong>&nbsp;&nbsp;<font color="#666666">(填写数据库参数后，可以点击测试上面的参数是否正确)</font></td>
     </tr>
   </table>
 	
@@ -359,7 +359,7 @@ function EbakCheckForm(obj){
     <tr> 
       <td width="24%" height="25" bgcolor="#FFFFFF">用户名</td>
       <td height="25" bgcolor="#FFFFFF"> <input name="adminusername" type="text" id="adminusername" value="<?=$set_username?>">
-        <font color="#666666">(修改后要重新登录，8~30个字符)</font></td>
+        <font color="#666666">(修改后要重新登录，8~30个字符，区分大小写)</font></td>
     </tr>
     <tr> 
       <td height="25" bgcolor="#FFFFFF">密码</td>
@@ -380,13 +380,23 @@ function EbakCheckForm(obj){
       <td height="25" bgcolor="#FFFFFF">验证随机码</td>
       <td height="25" bgcolor="#FFFFFF"><input name="adminloginrnd" type="text" id="adminloginrnd" value="<?=$set_loginrnd?>">
         <font color="#666666">
-        <input type="button" name="Submit3" value="随机" onclick="document.form1.adminloginrnd.value='<?=$loginauthrnd?>';">
+        <input type="button" name="Submit3" value="随机" onClick="document.form1.adminloginrnd.value='<?=$loginauthrnd?>';">
         (修改后要重新登录，不限字符数)</font></td>
     </tr>
     <tr> 
       <td height="25" bgcolor="#FFFFFF">超时限制</td>
       <td height="25" bgcolor="#FFFFFF"><input name="outtime" type="text" id="outtime" value="<?=$set_outtime?>">
         分钟</td>
+    </tr>
+    <tr>
+      <td height="25" bgcolor="#FFFFFF">登录地址验证参数变量名</td>
+      <td height="25" bgcolor="#FFFFFF"><input name="loginurlcsvar" type="text" id="loginurlcsvar" value="<?=$ebak_set_loginurlcsvar?>">
+        <font color="#666666">(由字母和数字组成，需以字母为开头。空为id)</font></td>
+    </tr>
+    <tr>
+      <td height="25" bgcolor="#FFFFFF">登录地址验证参数</td>
+      <td height="25" bgcolor="#FFFFFF"><input name="loginurlcsval" type="text" id="loginurlcsval" value="<?=$ebak_set_loginurlcsval?>">
+      <font color="#666666">(可填写除“&lt;、&gt;、'、"、&”以外的字符，空为不开启；设置后，后台登录地址后面要加“?参数变量名=该参数”)</font></td>
     </tr>
     <tr> 
       <td height="25" bgcolor="#FFFFFF">登录是否需要验证码</td>
@@ -399,6 +409,16 @@ function EbakCheckForm(obj){
       <td height="25" bgcolor="#FFFFFF">验证码过期时间</td>
       <td height="25" bgcolor="#FFFFFF"><input name="keytime" type="text" id="keytime" value="<?=$ebak_set_keytime?>">
         秒 <font color="#666666">(时间越短效果越好)</font></td>
+    </tr>
+    <tr>
+      <td height="25" bgcolor="#FFFFFF">文件验证过期时间</td>
+      <td height="25" bgcolor="#FFFFFF"><input name="filerndtime" type="text" id="filerndtime" value="<?=$ebak_set_filerndtime?>">
+        小时 <font color="#666666">(0为不限)</font></td>
+    </tr>
+	<tr>
+      <td height="25" bgcolor="#FFFFFF">验证文件清理时间</td>
+      <td height="25" bgcolor="#FFFFFF"><input name="filerndctime" type="text" id="filerndctime" value="<?=$ebak_set_filerndctime?>">
+        天 <font color="#666666">(0为不清理。当不是点击退出系统时可能会保留文件，该设置可定时清理。)</font></td>
     </tr>
 	<tr>
       <td rowspan="2" valign="top" bgcolor="#FFFFFF">后台访问的UserAgent包含</td>
@@ -466,7 +486,7 @@ if($ebak_set_moredbserver)
                 <option value="4.0"<?=$moredbserver_fr[0]=='4.0'?' selected':''?>>4.0.*/3.*</option>
               </select>
             </td>
-            <td bgcolor="#FFFFFF" width="34%"><input name="moredbhost[]" type="text" id="moredbhost<?=$dbserverid?>" value="<?=$moredbserver_fr[1]?>"> <a href="#empirebak" onclick="EbakCheckDbServer('<?=$dbserverid?>');">[测试]</a>
+            <td bgcolor="#FFFFFF" width="34%"><input name="moredbhost[]" type="text" id="moredbhost<?=$dbserverid?>" value="<?=$moredbserver_fr[1]?>"> <a href="#empirebak" onClick="EbakCheckDbServer('<?=$dbserverid?>');">[测试]</a>
                 <input name="dbserverid[]" type="hidden" id="dbserverid<?=$dbserverid?>" value="<?=$dbserverid?>">
             </td>
             <td bgcolor="#FFFFFF" width="7%"><input name="moredbport[]" type="text" id="moredbport<?=$dbserverid?>" value="<?=$moredbserver_fr[2]?>" size="6"></td>
@@ -489,7 +509,7 @@ if($ebak_set_moredbserver)
 		</table>
 		<table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#DBEAF5">
         <tr>
-          <td height="25" colspan="9" bgcolor="#FFFFFF"><strong><a href="#empirebak" onclick="EbakShowAddDbServer();"><font color="#FF9900">[+]增加服务器</font></a></strong></td>
+          <td height="25" colspan="9" bgcolor="#FFFFFF"><strong><a href="#empirebak" onClick="EbakShowAddDbServer();"><font color="#FF9900">[+]增加服务器</font></a></strong></td>
         </tr>
         <tr>
           <td height="25" colspan="9" bgcolor="#FFFFFF"><font color="#666666">如果要删除服务器，只需把“服务器地址”设置为空。填写数据库信息后可以点“[测试]”检测信息是否正确。更新服务器后请刷新后台主界面以便显示更新。</font></td>
@@ -510,6 +530,10 @@ if($ebak_set_moredbserver)
       <td height="25" bgcolor="#FFFFFF">压缩包存放目录</td>
       <td height="25" bgcolor="#FFFFFF"><input name="sbakzippath" type="text" id="sbakzippath" value="<?=$bakzippath?>"></td>
     </tr>
+	<tr> 
+      <td height="25" bgcolor="#FFFFFF">保存设置目录</td>
+      <td height="25" bgcolor="#FFFFFF"><input name="sbaksetsavepath" type="text" id="sbaksetsavepath" value="<?=$baksetsavepath?>"></td>
+    </tr>
     <tr> 
       <td height="25" bgcolor="#FFFFFF">文件生成权限设置</td>
       <td height="25" bgcolor="#FFFFFF"><input type="radio" name="sfilechmod" value="0"<?=$filechmod0?>>
@@ -528,7 +552,7 @@ if($ebak_set_moredbserver)
         秒 <font color="#666666">(一般不需要设置，需要set_time_limit()支持才有效)</font></td>
     </tr>
     <tr> 
-      <td rowspan="2" bgcolor="#FFFFFF"> <p>MYSQL支持查询方式</p></td>
+      <td rowspan="2" bgcolor="#FFFFFF">MYSQL支持查询方式</td>
       <td height="25" bgcolor="#FFFFFF"><input name="slimittype" type="checkbox" id="slimittype" value="1"<?=$checklimittype?>>
         支持 <font color="#666666">(如果备份时出现下面错误,请将打勾去掉即可解决)</font></td>
     </tr>
@@ -541,6 +565,15 @@ if($ebak_set_moredbserver)
       <td height="25" bgcolor="#FFFFFF">空间不支持数据库列表</td>
       <td height="25" bgcolor="#FFFFFF"><input name="scanlistdb" type="checkbox" id="scanlistdb" value="1"<?=$canlistdb==1?' checked':''?>>
         不支持<font color="#666666">(如果空间不允许列出数据库,请打勾；并且要设置默认备份的数据库)</font></td>
+    </tr>
+	<tr>
+	  <td height="25" bgcolor="#FFFFFF">备份的数据表引擎</td>
+	  <td height="25" bgcolor="#FFFFFF"><select name="sdbtbtype" id="sdbtbtype">
+	    <option value="2"<?=$ebak_set_dbtbtype==2?' selected':''?>>兼容模式</option>
+	    <option value="0"<?=$ebak_set_dbtbtype==0?' selected':''?>>MYISAM引擎</option>
+	    <option value="1"<?=$ebak_set_dbtbtype==1?' selected':''?>>INNODB引擎</option>
+	    </select>
+	    <font color="#666666">(如果备份表都是MYISAM，可选择MYISAM引擎，效率更高)</font></td>
     </tr>
 	<tr>
 	  <td height="25" bgcolor="#FFFFFF">隐藏数据库显示</td>
@@ -593,7 +626,7 @@ if($ebak_set_moredbserver)
 	?>
     <tr> 
       <td height="25" colspan="2" bgcolor="#FFFFFF"> <div align="left"> 
-          <input type="submit" name="Submit" value=" 设置 ">&nbsp;&nbsp;
+          <input type="submit" name="Submit" value=" 设 置 ">&nbsp; &nbsp;
           <input type="reset" name="Submit2" value="重置">
         </div></td>
     </tr>

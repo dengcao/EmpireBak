@@ -1,0 +1,30 @@
+<?php
+require('class/connect.php');
+require('class/functions.php');
+require LoadLang('f.php');
+$phome=$_GET['phome'];
+if(empty($phome))
+{$phome=$_POST['phome'];}
+//µÇÂ½
+if($phome=="login")
+{}
+else
+{
+	$lur=islogin();
+	$loginin=$lur['username'];
+	$rnd=$lur['rnd'];
+}
+
+if($phome=="login")//µÇÂ¼
+{
+	$lusername=$_POST['lusername'];
+	$lpassword=$_POST['lpassword'];
+	$key=$_POST['key'];
+	$lifetime=0;
+	login($lusername,$lpassword,$key,$lifetime);
+}
+else
+{
+	printerror("ErrorUrl","history.go(-1)");
+}
+?>

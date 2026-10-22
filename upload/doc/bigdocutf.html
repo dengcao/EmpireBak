@@ -13,7 +13,7 @@
         <tr>
           <td width="50%"><strong><font color="#FFFFFF">帝國備份王(Empirebak)說明文檔</font></strong></td>
           <td width="50%"><div align="right"><font color="#FFFFFF">Language: </font>
-              <select name="select" onchange="self.location.href=this.value;" style="width:300">
+              <select name="select" onChange="self.location.href=this.value;" style="width:300">
                 <option value='doc.html'>Chinese simplified (gb2312)</option>
                 <option value='docutf.html'>Chinese simplified (utf-8)</option>
                 <option value='bigdoc.html'>Chinese traditional (big5)</option>
@@ -26,30 +26,29 @@
   <tr>
     <td height="25" bgcolor="#FFFFFF"><table width="100%" border="0" cellspacing="1" cellpadding="3">
         <tr> 
-          <td width="10%" height="30" onmouseover="this.style.backgroundColor='#DBEAF5'" onmouseout="this.style.backgroundColor='#ffffff'"> 
+          <td width="10%" height="30" onMouseOver="this.style.backgroundColor='#DBEAF5'" onMouseOut="this.style.backgroundColor='#ffffff'"> 
             <div align="center"><a href="#aboutebak">關於備份王</a></div></td>
-          <td width="10%" onmouseover="this.style.backgroundColor='#DBEAF5'" onmouseout="this.style.backgroundColor='#ffffff'">
+          <td width="10%" onMouseOver="this.style.backgroundColor='#DBEAF5'" onMouseOut="this.style.backgroundColor='#ffffff'">
 <div align="center"><a href="#ebak">系統特性</a></div></td>
-          <td width="10%" onmouseover="this.style.backgroundColor='#DBEAF5'" onmouseout="this.style.backgroundColor='#ffffff'">
+          <td width="10%" onMouseOver="this.style.backgroundColor='#DBEAF5'" onMouseOut="this.style.backgroundColor='#ffffff'">
 <div align="center"><a href="#hj">運行環境</a></div></td>
-          <td width="10%" onmouseover="this.style.backgroundColor='#DBEAF5'" onmouseout="this.style.backgroundColor='#ffffff'">
+          <td width="10%" onMouseOver="this.style.backgroundColor='#DBEAF5'" onMouseOut="this.style.backgroundColor='#ffffff'">
 <div align="center"><a href="#setup">安裝說明</a></div></td>
-          <td width="10%" onmouseover="this.style.backgroundColor='#DBEAF5'" onmouseout="this.style.backgroundColor='#ffffff'">
+          <td width="10%" onMouseOver="this.style.backgroundColor='#DBEAF5'" onMouseOut="this.style.backgroundColor='#ffffff'">
 <div align="center"><a href="#usebak">使用說明</a></div></td>
-<td width="10%" onmouseover="this.style.backgroundColor='#DBEAF5'" onmouseout="this.style.backgroundColor='#ffffff'">
+<td width="10%" onMouseOver="this.style.backgroundColor='#DBEAF5'" onMouseOut="this.style.backgroundColor='#ffffff'">
 <div align="center"><a href="#question">常見問題</a></div></td>
-          <td width="10%" onmouseover="this.style.backgroundColor='#DBEAF5'" onmouseout="this.style.backgroundColor='#ffffff'"><div align="center"><a href="#mustdobak">注意事項</a></div></td>
-		  <td width="10%" onmouseover="this.style.backgroundColor='#DBEAF5'" onmouseout="this.style.backgroundColor='#ffffff'"><div align="center"><a href="#ebma" title="EmpireBak+phpMyAdmin+高安全"><font color="#ff0000"><strong>EBMA系統</strong></font></a></div></td>
-		  <td width="10%" onmouseover="this.style.backgroundColor='#DBEAF5'" onmouseout="this.style.backgroundColor='#ffffff'">
-<div align="center"><a href="http://bbs.phome.net/ListThread?forumid=27" target="_blank">技術支持</a></div></td>
-          <td width="10%" onmouseover="this.style.backgroundColor='#DBEAF5'" onmouseout="this.style.backgroundColor='#ffffff'">
+          <td width="10%" onMouseOver="this.style.backgroundColor='#DBEAF5'" onMouseOut="this.style.backgroundColor='#ffffff'"><div align="center"><a href="#mustdobak">注意事項</a></div></td>
+		  <td width="10%" onMouseOver="this.style.backgroundColor='#DBEAF5'" onMouseOut="this.style.backgroundColor='#ffffff'"><div align="center"><a href="#ebma" title="EmpireBak+phpMyAdmin+高安全"><font color="#ff0000"><strong>EBMA系統</strong></font></a></div></td>
+		  <td width="10%" onMouseOver="this.style.backgroundColor='#DBEAF5'" onMouseOut="this.style.backgroundColor='#ffffff'">
+<div align="center"><a href="http://www.phome.net/support/" target="_blank">技術支持</a></div></td>
+          <td width="10%" onMouseOver="this.style.backgroundColor='#DBEAF5'" onMouseOut="this.style.backgroundColor='#ffffff'">
 <div align="center"><a href="http://www.phome.net/service/xuke.html" target="_blank">許可協議</a></div></td>
         </tr>
       </table></td>
   </tr>
   <tr>
-    <td height="38" bgcolor="#FFFFFF"><div align="center"><a href="http://www.phome.net/ecms72/" target="_blank"><strong><font color="#FF0000" size="3">帝國網站管理系統全面開源 
-    － 最安全、最穩定的開源CMS系統</font></strong></a></div></td>
+    <td height="38" bgcolor="#FFFFFF"><div align="center"><a href="http://www.phome.net" target="_blank"><strong><font color="#FF0000" size="3">帝國CMS － 穩定可靠、安全省心</font></strong></a></div></td>
   </tr>
   <tr> 
     <td bgcolor="#FFFFFF"><table width="100%" border="0" align="center" cellpadding="3" cellspacing="1" id="aboutebak">
@@ -115,14 +114,17 @@
           <td height="22"><table border=0 width=100% cellspacing=1 cellpadding=10 bgcolor='#cccccc'>
               <tr> 
                 <td width='100%' bgcolor='#FFFFFF' style='word-break:break-all;line-height: 20px'>備份文件均生成*.php文件，並且採用登錄驗證，只有登錄的管理員才能進行數據恢復；<br>
-                  備份目錄、壓縮目錄可自定義；<br>
+                  備份目錄、壓縮目錄、保存設置目錄可自定義；<br>
                   支持密碼與認證碼雙重密碼登錄驗證；<br>
                   登錄支持驗證碼驗證，採用過期時間+加密字符驗證，有效防止暴力提交表單；<br>
                   第一重安全驗證：登錄隨機驗證碼加密驗證；<br>
                   第二重安全驗證：隨機變量名+隨機驗證字符，無規律可尋，並且後台無法查看，必須進入FTP查看配置文件內容，高安全性；<br>
                   第三重通用性安全驗證：給整合程序增加第三重驗證，驗證字符由系統隨機生成，並且後台無法查看，必須進入FTP查看配置文件內容，高安全性；<br>
                   第四重安全驗證：支持瀏覽器USER-AGENT驗證功能，只有包含指定信息的瀏覽器才可以訪問後台，也就是說可以指定某一台機器才能訪問後台；<br>
-                  安裝目錄可任意自定義；<br>
+                  第五重安全驗證：支持文件驗證，登錄時才會產生文件，沒有該文件無法通過驗證；<br>
+                  第六重安全驗證：支持設置登錄地址驗證參數，設置後登錄地址必須加該參數變量名和參數內容才可以登錄，即使被知道後台目錄名，沒有參數一樣登錄不了；<br>
+                  第七重安全驗證：除了後台目錄支持自定義外，登錄文件也支持自定義。<br>
+                  安裝與管理目錄可任意自定義；<br>
                   管理員登錄驗證COOKIE變量前綴後台直接設置。</td>
               </tr>
             </table></td>
@@ -139,7 +141,9 @@
                   在線建立、刪除數據庫，優化、修復、清空、刪除數據表、批量替換表名，查看表字段等功能，管理數據很方便；<br>
                   在線執行SQL、導入*.sql文件，方便操作數據；<br>
                   支持批量替換備份目錄文件內容，非常方便的文本替換功能；<br>
-                  可隨時關閉與啟用系統使用。</td>
+                  支持時區設置；<br>
+                  可隨時關閉與啟用系統使用；<br>
+                  兼容各PHP和數據庫版本。</td>
               </tr>
             </table></td>
         </tr>
@@ -265,6 +269,14 @@
                       <td height="23">tmp</td>
                       <td><font color="#666666">臨時文件目錄</font></td>
                     </tr>
+                    <tr bgcolor="#FFFFFF">
+                      <td height="23">tmp/eadminlogin</td>
+                      <td><font color="#666666">臨時文件目錄</font></td>
+                    </tr>
+                    <tr bgcolor="#FFFFFF">
+                      <td height="23">tmp/etmpup</td>
+                      <td><font color="#666666">臨時文件目錄</font></td>
+                    </tr>
                   </table></td>
               </tr>
             </table></td>
@@ -282,6 +294,9 @@
               </tr>
             </table>          </td>
         </tr>
+        <tr>
+          <td height="42">( 詳細也可查看在線的「帝國備份王和EBMA系統安裝圖文教程」：<a href="http://www.phome.net/EmpireBak/doc/install/" target="_blank">http://www.phome.net/EmpireBak/doc/install/</a> )</td>
+        </tr>
       </table>
       <br> 
       <table width="100%" border="0" align="center" cellpadding="3" cellspacing="1" id="usebak">
@@ -289,11 +304,11 @@
           <td height="23" bgcolor="#DBEAF5"><strong><font color="#0000FF">四、使用說明</font></strong></td>
         </tr>
         <tr> 
-          <td height="22">1．<strong>備份數據：</strong>後台 －＞備份數據 －＞ 選擇備份的數據庫 －＞ 選擇備份的表與設定備份參數 
+          <td height="22">1．<strong>備份數據：</strong>後台 －＞ 備份數據 －＞ 選擇備份的數據庫 －＞ 選擇備份的表與設定備份參數 
             －＞ 備份完畢。</td>
         </tr>
         <tr> 
-          <td height="22">2．<strong>恢復數據：</strong>後台 －＞恢復數據 －＞ 選擇恢復源目錄，數據庫 －＞ 恢復完畢。</td>
+          <td height="22">2．<strong>恢復數據：</strong>後台 －＞ 恢復數據 －＞ 選擇恢復源目錄，數據庫 －＞ 恢復完畢。</td>
         </tr>
         <tr> 
           <td height="22">3．<strong>下載備份文件：</strong>FTP下載備份目錄下相應的備份目錄即可。默認的備份目錄為「bdata」。(對於文件少的也可直接到「管理備份目錄」打包下載)</td>
@@ -307,61 +322,61 @@
         <tr> 
           <td height="22"><table width="100%" border="0" cellspacing="1" cellpadding="3">
               <tr> 
-                <td height="25"><strong>1.如何備份MYSQL數據庫？</strong></td>
+                <td height="25"><strong>1、如何備份MYSQL數據庫？</strong></td>
               </tr>
               <tr> 
-                <td height="25"><font color="#333333">&nbsp;&nbsp;答：點菜單「備份數據」-&gt;「選擇要備份的數據庫」-&gt;「選擇要備份的數據表」-&gt; 
+                <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>答：</strong>點菜單「備份數據」-&gt;「選擇要備份的數據庫」-&gt;「選擇要備份的數據表」-&gt; 
                   設置好備份選項，點擊「開始備份」按鈕即可進行備份操作。</font></td>
               </tr>
               <tr> 
-                <td height="25"><strong>2.如何恢復數據？</strong></td>
+                <td height="25"><strong>2、如何恢復數據？</strong></td>
               </tr>
               <tr> 
-                <td height="25"><font color="#333333">&nbsp;&nbsp;答：點菜單「恢復數據」-&gt; 
+                <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>答：</strong>點菜單「恢復數據」-&gt; 
                   選擇恢復源目錄、數據庫 -&gt; 點擊「開始恢復」即可進行恢復數據操作。</font></td>
               </tr>
               <tr> 
-                <td height="25"><strong>3.如何下載已備份的數據？</strong></td>
+                <td height="25"><strong>3、如何下載已備份的數據？</strong></td>
               </tr>
               <tr> 
-                <td height="25"><font color="#333333">&nbsp;&nbsp;答：直接通過FTP下載「bdata/」下的備份目錄即可，恢復時將此目錄複製到《帝國備份王》的「bdata/」目錄即可。<br>
+                <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>答：</strong>直接通過FTP下載「bdata/」下的備份目錄即可，恢復時將此目錄複製到《帝國備份王》的「bdata/」目錄即可。<br>
                   &nbsp;&nbsp;(小數據也可以直接在線「打包並下載」)</font></td>
               </tr>
               <tr> 
-                <td height="25"><strong>4.第一次使用，怎麼設置更安全？</strong></td>
+                <td height="25"><strong>4、第一次使用，怎麼設置更安全？</strong></td>
               </tr>
               <tr> 
-                <td height="25"><font color="#333333">&nbsp;&nbsp;答：(1)、後台-&gt;「全局參數設置」-&gt;「管理員設置」：修改默認的用戶名、密碼、認證碼與驗證隨機碼；<br>
+                <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>答：</strong>(1)、後台-&gt;「全局參數設置」-&gt;「管理員設置」：修改默認的用戶名、密碼、認證碼與驗證隨機碼；<br>
                   (2)、後台-&gt;「全局參數設置」-&gt;「COOKIE設置」：修改COOKIE變量前綴(只能用字母和下劃線)；<br>
                   (3)、安裝目錄命名為不容易被猜到且容易記憶的目錄名。</font></td>
               </tr>
               <tr> 
-                <td height="25"><strong>5.出現〞You have an error in your SQL syntax;...right 
-                  syntax to use near '-1' at line 1〞錯誤</strong></td>
+                <td height="25"><strong>5、出現」You have an error in your SQL syntax;...right 
+                  syntax to use near '-1' at line 1」錯誤</strong></td>
               </tr>
               <tr> 
-                <td height="25"><font color="#333333">&nbsp;&nbsp;解決方法：後台〞全局參數設置〞-&gt;〞其它設置〞那把〞MYSQL支持查詢方式〞項打勾去掉即可。</font></td>
+                <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>解決方法：</strong>後台」全局參數設置」-&gt;」其它設置」那把」MYSQL支持查詢方式」項打勾去掉即可。</font></td>
               </tr>
               <tr> 
-                <td height="25"><strong>6.備份時提示〞您來自的鏈接不存在〞</strong></td>
+                <td height="25"><strong>6、備份時提示」您來自的鏈接不存在」</strong></td>
               </tr>
               <tr> 
-                <td height="25"><font color="#333333">&nbsp;&nbsp;解決方法：您沒設置好目錄權限，重新設置安裝說明第2步需要設置的目錄權限即可解決。</font></td>
+                <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>解決方法：</strong>您沒設置好目錄權限，重新設置安裝說明第2步需要設置的目錄權限即可解決。</font></td>
               </tr>
               <tr> 
-                <td height="25"><strong>7.空間的PHP運行於安全模式怎麼備份？</strong></td>
+                <td height="25"><strong>7、空間的PHP運行於安全模式怎麼備份？</strong></td>
               </tr>
               <tr> 
-                <td height="25"><font color="#333333">&nbsp;&nbsp;解決方法：〞全局參數設置〞-&gt;〞其它設置〞那把〞PHP運行於安全模式〞項打勾．這樣每次都會備份到〞safemod〞目錄。</font></td>
+                <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>解決方法：</strong>」全局參數設置」-&gt;」其它設置」那把」PHP運行於安全模式」項打勾．這樣每次都會備份到」safemod」目錄。</font></td>
               </tr>
               <tr> 
-                <td height="25"><strong>8.不想顯示數據庫列表的方法</strong></td>
+                <td height="25"><strong>8、不想顯示數據庫列表的方法</strong></td>
               </tr>
               <tr> 
-                <td height="25"><font color="#333333">&nbsp;&nbsp;解決方法：〞全局參數設置〞-&gt;〞數據庫設置〞那輸入〞默認備份的數據庫〞即可</font></td>
+                <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>解決方法：</strong>」全局參數設置」-&gt;」數據庫設置」那輸入」默認備份的數據庫」即可</font></td>
               </tr>
               <tr> 
-                <td height="25"><strong>9.MYSQL 4.1以上版本備份推薦檢查一下備份數據</strong></td>
+                <td height="25"><strong>9、MYSQL 4.1以上版本備份推薦檢查一下備份數據</strong></td>
               </tr>
               <tr> 
                 <td height="25"><font color="#333333">&nbsp;&nbsp;備份好數據後，然後到備份目錄下打開任意一個備份.php文件，看備份數據文件內容是否正常。如果都是「???」之類數據，說明編碼不對，需要重新備份數據，並選擇默認編碼。</font></td>
@@ -376,84 +391,111 @@
                 <td height="25"><strong>11、忘記後台登錄密碼怎麼辦？</strong></td>
               </tr>
               <tr> 
-                <td height="25"><font color="#333333">&nbsp;&nbsp;解決方法：修改class/config.php文件，內容找到「$set_password」，把它的值改為「14e1b600b1fd579f47433b88e8d85291」，密碼就是：123456</font></td>
+                <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>解決方法：</strong>修改class/config.php文件，內容找到「$set_password」，把它的值改為「14e1b600b1fd579f47433b88e8d85291」，密碼就是：123456</font></td>
               </tr>
               <tr> 
                 <td height="25"><strong>12、忘記後台登錄認證碼怎麼辦？</strong></td>
               </tr>
               <tr> 
-                <td height="25"><font color="#333333">&nbsp;&nbsp;解決方法：打開class/config.php文件，內容找到「$set_loginauth」，把它的值就是認證碼</font></td>
-              </tr>
-              <tr> 
-                <td height="25"><strong>13、出現「Access denied; you need the SHOW 
-                  DATABASES privilege for this operation」錯誤</strong></td>
-              </tr>
-              <tr> 
-                <td height="25"><font color="#333333">&nbsp;&nbsp;</font>解決方法：<font color="#333333">〞全局參數設置〞-&gt;〞其它設置〞那把〞空間不支持數據庫列表〞項打勾去掉即可。</font></td>
-              </tr>
-              <tr> 
-                <td height="25"><strong>14、如何增加默認數據編碼選項？</strong></td>
-              </tr>
-              <tr> 
-                <td height="25"><font color="#333333">&nbsp;&nbsp;答：修改「lang/dbchar.php」編碼配置文件。</font></td>
+                <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>解決方法：</strong>打開class/config.php文件，內容找到「$set_loginauth」，把它的值就是認證碼</font></td>
               </tr>
               <tr>
-                <td height="25"><strong>15、如何自己做語言包？</strong></td>
+                <td height="25"><strong>13、不小心把驗證碼過期時間設置為0秒，無法登錄，怎麼辦？</strong></td>
               </tr>
               <tr>
-                <td height="25"><font color="#333333">&nbsp;&nbsp;答：(1)、先複製lang/gb目錄，然後重命名，比如說英文語言包，用&quot;en&quot;目錄名；<br>
+                <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>解決方法：</strong>修改class/config.php文件，內容找到「$ebak_set_keytime」，把它的值改為對應的秒數。</font></td>
+              </tr>
+              <tr>
+                <td height="25"><strong>14、登錄提示「登錄成功，正在進入控制面板．．．．．．」，接著又提示「您還未登錄」</strong></td>
+              </tr>
+              <tr>
+                <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>答：</strong>原因是 /tmp/eadminlogin 目錄權限不可寫導致，請將此目錄權限設置為777權限即可解決。 (新版登錄增加文件驗證)</font></td>
+              </tr>
+              <tr> 
+                <td height="25"><strong>15、出現「Access denied; you need the SHOW 
+                  DATABASES privilege for this operation」無權限錯誤提示</strong></td>
+              </tr>
+              <tr> 
+                <td height="25"><font color="#333333">&nbsp;&nbsp;</font><strong>解決方法：</strong><font color="#333333">」全局參數設置」-&gt;」其它設置」那把」空間不支持數據庫列表」項打勾去掉即可。</font></td>
+              </tr>
+              <tr> 
+                <td height="25"><strong>16、如何增加默認數據編碼選項？</strong></td>
+              </tr>
+              <tr> 
+                <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>答：</strong>修改「lang/dbchar.php」編碼配置文件。</font></td>
+              </tr>
+              <tr>
+                <td height="25"><strong>17、如何自己做語言包？</strong></td>
+              </tr>
+              <tr>
+                <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>答：</strong>(1)、先複製lang/gb目錄，然後重命名，比如說英文語言包，用&quot;en&quot;目錄名；<br>
                   (2)、修改語言包裡的文字為其它語言；<br>
                   (3)、修改「lang/dbchar.php」文件中的$langcharr數組加上新增的語言(目錄名,編碼,語言名稱)；<br>
                   (4)、新增語言包完畢。</font></td>
               </tr>
               <tr>
-                <td height="25"><strong>16、如何增加多MYSQL服務器？</strong></td>
+                <td height="25"><strong>18、如何增加多MYSQL服務器？</strong></td>
               </tr>
               <tr>
-                <td height="25"> <font color="#333333">&nbsp;&nbsp;答：點菜單「全局參數設置」-&gt; 「多服務器設置」-&gt; 「增加服務器」：填寫數據庫服務器信息後點「設置」按鈕，增加後刷新後台主界面即可看到服務器切換選項。</font></td>
+                <td height="25"> <font color="#333333">&nbsp;&nbsp;<strong>答：</strong>點菜單「全局參數設置」-&gt; 「多服務器設置」-&gt; 「增加服務器」：填寫數據庫服務器信息後點「設置」按鈕，增加後刷新後台主界面即可看到服務器切換選項。</font></td>
               </tr>
               <tr>
-                <td height="25"><strong>17、如何隱藏數據庫顯示？</strong></td>
+                <td height="25"><strong>19、如何隱藏數據庫顯示？</strong></td>
               </tr>
               <tr>
-                <td height="25"><font color="#333333">&nbsp;&nbsp;答：點菜單「全局參數設置」-&gt; 「其它設置」-&gt; 「隱藏數據庫顯示」：填寫不想顯示的數據庫名，多個數據庫名用半角逗號&quot;,&quot;隔開。</font></td>
+                <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>答：</strong>點菜單「全局參數設置」-&gt; 「其它設置」-&gt; 「隱藏數據庫顯示」：填寫不想顯示的數據庫名，多個數據庫名用半角逗號&quot;,&quot;隔開。</font></td>
               </tr>
               <tr>
-                <td height="25"><strong>18、數據存放格式「正常」與「十六進制方式」區別？</strong></td>
+                <td height="25"><strong>20、數據存放格式「正常」與「十六進制方式」區別？</strong></td>
               </tr>
               <tr>
-                <td height="25"><font color="#333333">&nbsp;&nbsp;答：兩種備份方式恢復後內容都一樣，「十六進制方式」備份的數據不容易受編碼影響，但備份文件更大，會佔用更多的空間。</font></td>
+                <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>答：</strong>兩種備份方式恢復後內容都一樣，「十六進制方式」備份的數據不容易受編碼影響，但備份文件更大，會佔用更多的空間。</font></td>
               </tr>
               <tr>
-                <td height="25"><strong>19、如何隨時關閉帝國備份王使用？</strong></td>
+                <td height="25"><strong>21、如何隨時關閉帝國備份王使用？</strong></td>
               </tr>
               <tr>
-                <td height="25"><font color="#333333">&nbsp;&nbsp;答：只需將closesys目錄下的「empirebak.off.txt」文件重命名為「empirebak.off」即可關閉。<br>
+                <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>答：</strong>只需將closesys目錄下的「empirebak.off.txt」文件重命名為「empirebak.off」即可關閉。<br>
     開啟同樣將「empirebak.off」重命名為「empirebak.off.txt」即可開啟。</font></td>
               </tr>
               <tr>
-                <td height="25"><strong>20、如何利用帝國備份王對數據庫進行數據編碼轉換？</strong></td>
+                <td height="25"><strong>22、如何利用帝國備份王對數據庫進行數據編碼轉換？</strong></td>
               </tr>
               <tr>
-                <td height="25"><font color="#333333">&nbsp;&nbsp;答：可以參考這個教程：<a href="http://bbs.phome.net/showthread-13-45475-0.html" target="_blank">http://bbs.phome.net/showthread-13-45475-0.html</a></font></td>
+                <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>答：</strong>可以參考這個教程：<a href="http://www.phome.net/zx/empirecms/cdata/215.html" target="_blank">http://www.phome.net/zx/empirecms/cdata/215.html</a></font></td>
               </tr>
               <tr>
-                <td height="25"><strong>21、設置錯訪問的UserAgent信息，怎麼辦？</strong></td>
+                <td height="25"><strong>23、設置錯訪問的UserAgent信息，怎麼辦？</strong></td>
               </tr>
               <tr>
-                <td height="25"><font color="#333333">&nbsp;&nbsp;解決方法：修改class/config.php文件，內容找到「$ebak_set_ckuseragent」，把它的值設置為空。</font></td>
+                <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>解決方法：</strong>修改class/config.php文件，內容找到「$ebak_set_ckuseragent」，把它的值設置為空。</font></td>
               </tr>
               <tr>
-                <td height="25"><strong>22、不小心把驗證碼過期時間設置為0秒，無法登錄，怎麼辦？</strong></td>
+                <td height="25"><strong>24、提示「xxx is close」說明該模塊被關閉，如何開啟？</strong></td>
               </tr>
               <tr>
-                <td height="25"><font color="#333333">&nbsp;&nbsp;解決方法：修改class/config.php文件，內容找到「$ebak_set_keytime」，把它的值改為對應的秒數。</font></td>
+                <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>答：</strong>修改class/config.php文件，內容找到「$ebak_set_hclosemods」，刪除掉對應關閉的模塊，然後保存文件即可。</font></td>
+              </tr>
+              <tr>
+                <td height="25"><strong>25、如何關閉使用模塊？</strong></td>
+              </tr>
+              <tr>
+                <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>答：</strong>修改class/config.php文件，內容找到「$ebak_set_hclosemods」，加上對應要關閉的模塊，然後保存文件即可。<br>
+                如關掉刪除數據庫模塊用：「$ebak_set_hclosemods=',DropDb,';」。</font></td>
+              </tr>
+              <tr>
+                <td height="25"><strong>26、默認關閉PHP錯誤提示，如果要顯示怎麼改？</strong></td>
+              </tr>
+              <tr>
+                <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>答：</strong>修改class/config.php文件，內容找到「$ebak_set_webdebug=0;」，把值「0」改為「1」即可。</font></td>
+              </tr>
+              <tr>
+                <td height="25"><strong>27、默認時間是PHP默認時區，如果要指定時區，要怎麼修改？</strong></td>
+              </tr>
+              <tr>
+                <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>答：</strong>修改class/config.php文件，內容找到「$ebak_set_timezone」，把值指定時區即可。如指定北京時間用「PRC」。</font></td>
               </tr>
               
-              
-              <tr> 
-                <td height="36">（其他問題您可以到官方論壇咨詢：<a href="http://bbs.phome.net" target="_blank"><u>http://bbs.phome.net</u></a>）</td>
-              </tr>
             </table></td>
         </tr>
       </table>
@@ -484,7 +526,7 @@
         <td height="23" bgcolor="#DBEAF5"><strong><font color="#0000FF">七、EBMA系統簡介</font></strong></td>
       </tr>
       <tr>
-        <td height="22">「EmpireBak+phpMyAdmin+高安全」整合包就是EBMA系統、開源免費。是一款更安全的MYSQL數據庫管理和備份系統。字母取自「Empire」的E、「Bak」的B、「My」的M、「Admin」的A。</td>
+        <td height="22">「<strong>E</strong>mpire<strong>B</strong>ak+php<strong>M</strong>y<strong>A</strong>dmin+高安全」整合包就是EBMA系統、開源免費。是一款更安全的MYSQL數據庫管理和備份系統。字母取自「Empire」的E、「Bak」的B、「My」的M、「Admin」的A。</td>
       </tr>
 
     </table>
@@ -499,20 +541,20 @@
             <td height="25"><strong>1、EBMA系統是什麼？</strong></td>
           </tr>
           <tr>
-            <td height="25"><font color="#333333">&nbsp;&nbsp;答：「EmpireBak+phpMyAdmin+高安全」整合包就是EBMA系統、開源免費。字母取自「Empire」的E、「Bak」的B、「My」的M、「Admin」的A。</font></td>
+            <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>答：</strong>「<strong><font color="#FF0000">E</font></strong>mpire<strong><font color="#FF0000">B</font></strong>ak+php<strong><font color="#FF0000">M</font></strong>y<strong><font color="#FF0000">A</font></strong>dmin+高安全」整合包就是EBMA系統、開源免費。字母取自「Empire」的E、「Bak」的B、「My」的M、「Admin」的A。</font></td>
           </tr>
           <tr>
             <td height="25"><strong>2、為什麼要使用EBMA系統的phpMyAdmin，而不使用原生的phpMyAdmin？</strong></td>
           </tr>
           <tr>
-            <td height="25"><font color="#333333">&nbsp;&nbsp;答：因為EBMA系統具有高安全性。而眾所周知原生的phpMyAdmin本身是不安全的，必須非常小心謹慎的隱藏目錄，是服務器的安全隱患之一(這也是帝國官方開發EBMA系統的初衷)。<br>
+            <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>答：</strong>因為EBMA系統具有高安全性。而眾所周知原生的phpMyAdmin本身是不安全的，必須非常小心謹慎的隱藏目錄，是服務器的安全隱患之一(這也是帝國官方開發EBMA系統的初衷)。<br>
 使用EBMA系統安全性更高，即使目錄被知道，也不會有安全問題。</font></td>
           </tr>
           <tr>
             <td height="25"><strong>3、EBMA系統優勢有哪些？</strong></td>
           </tr>
           <tr>
-            <td height="25"><font color="#333333">&nbsp;&nbsp;答：(1)、高安全性；<br>
+            <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>答：</strong>(1)、高安全性；<br>
               (2)、帝國備份王備份大數據穩定高效；<br>
               (3)、高安全的phpMyAdmin，管理更放心；<br>
               (4)、支持多MYSQL服務器一起管理與備份；<br>
@@ -526,38 +568,46 @@
             <td height="25"><strong>4、EBMA系統的phpMyAdmin和原生的phpMyAdmin代碼有什麼區別？</strong></td>
           </tr>
           <tr>
-            <td height="25"><font color="#333333">&nbsp;&nbsp;答：代碼一樣，唯一的區別：所有php文件都加上了帝國備份王安全驗證代碼。</font></td>
+            <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>答：</strong>代碼一樣，唯一的區別：所有php文件都加上了帝國備份王安全驗證代碼。</font></td>
           </tr>
           <tr>
             <td height="25"><strong>5、帝國官方開發EBMA系統的初衷是什麼？</strong></td>
           </tr>
           <tr>
-            <td height="25"><font color="#333333">&nbsp;&nbsp;答：讓大家使用上更安全的phpMyAdmin來管理MYSQL，讓網站更安全。</font></td>
+            <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>答：</strong>讓大家使用上更安全的phpMyAdmin來管理MYSQL，讓網站更安全。</font></td>
           </tr>
           <tr>
-            <td height="25"><strong>6、已經安裝過帝國備份王，如何再安裝EBMA的phpMyAdmin？</strong></td>
+            <td height="25"><strong>6、如何安裝EBMA系統？</strong></td>
           </tr>
           <tr>
-            <td height="25"><font color="#333333">&nbsp;&nbsp;答：可以下載EBMA系統安裝包，然後把upload目錄裡的「eapi」目錄上傳到帝國備份王目錄即可安裝成功。(說明：需要使用帝國備份王5.1及以上版本。)<br>
-EBMA系統下載地址：<a href="http://ebak.phome.net" target="_blank">http://ebak.phome.net</a></font></td>
+            <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>答：</strong>(1)、先安裝帝國備份王；<br>
+              (2)、解壓EBMA系統安裝包後，把upload目錄裡的「eapi」目錄上傳到帝國備份王目錄即可安裝成功。<br>
+            EBMA系統下載地址：<a href="http://www.phome.net/EmpireBak/ebma/" target="_blank">http://www.phome.net/EmpireBak/ebma/</a></font></td>
           </tr>
           <tr>
-            <td height="25"><strong>7、如何修改EBMA系統的phpMyAdmin目錄名？</strong></td>
+            <td height="25"><strong>7、已經安裝過帝國備份王，如何再安裝EBMA的phpMyAdmin？</strong></td>
           </tr>
           <tr>
-            <td height="25"><font color="#333333">&nbsp;&nbsp;答：先重命名「/eapi/phpmyadmin」目錄名(phpmyadmin目錄可任意重命名，eapi目錄不能修改)，然後登錄帝國備份王后台&gt;「全局參數設置」&gt;「EBMA系統」：修改「phpmyadmin目錄名」即可。</font></td>
+            <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>答：</strong>可以下載EBMA系統安裝包，然後把upload目錄裡的「eapi」目錄上傳到帝國備份王目錄即可安裝成功。(說明：需要使用帝國備份王5.1及以上版本。)<br>
+EBMA系統下載地址：<a href="http://www.phome.net/EmpireBak/ebma/" target="_blank">http://www.phome.net/EmpireBak/ebma/</a></font></td>
           </tr>
           <tr>
-            <td height="25"><strong>8、EBMA系統的phpMyAdmin可以隨時關閉嗎？</strong></td>
+            <td height="25"><strong>8、如何修改EBMA系統的phpMyAdmin目錄名？</strong></td>
           </tr>
           <tr>
-            <td height="25"><font color="#333333">&nbsp;&nbsp;答：可以要使用時開啟，不使用時關閉。開啟/關閉方法：登錄帝國備份王后台&gt;「全局參數設置」&gt;「EBMA系統」：設置「是否開啟phpmyadmin」。</font></td>
+            <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>答：</strong>先重命名「/eapi/phpmyadmin」目錄名(phpmyadmin目錄可任意重命名，但eapi目錄不能修改)，然後登錄帝國備份王后台&gt;「全局參數設置」&gt;「EBMA系統」：修改「phpmyadmin目錄名」即可。</font></td>
           </tr>
           <tr>
-            <td height="25"><strong>9、使用時有什麼注意事項？</strong></td>
+            <td height="25"><strong>9、EBMA系統的phpMyAdmin可以隨時關閉嗎？</strong></td>
           </tr>
           <tr>
-            <td height="25"><font color="#333333">&nbsp;&nbsp;答：使用phpmyadmin更改數據表過程中一定不要切換服務器。</font></td>
+            <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>答：</strong>可以要使用時開啟，不使用時關閉。開啟/關閉方法：登錄帝國備份王后台&gt;「全局參數設置」&gt;「EBMA系統」：設置「是否開啟phpmyadmin」。</font></td>
+          </tr>
+          <tr>
+            <td height="25"><strong>10、使用時有什麼注意事項？</strong></td>
+          </tr>
+          <tr>
+            <td height="25"><font color="#333333">&nbsp;&nbsp;<strong>答：</strong>使用phpmyadmin更改數據表過程中一定不要切換服務器。</font></td>
           </tr>
         </table></td>
       </tr>

@@ -43,6 +43,10 @@ function do_dbclose(){
 
 //…Ë÷√±‡¬Î
 function do_DoSetDbChar($dbchar){
+	if(!$dbchar)
+	{
+		return '';
+	}
 	@mysql_query('set character_set_connection='.$dbchar.',character_set_results='.$dbchar.',character_set_client=binary;');
 }
 

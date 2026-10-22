@@ -24,6 +24,6 @@ if(file_exists('eapi/ebma.php'))
 {
 	$haveebma=1;
 }
-$loginauthrnd=make_password(30);
+$loginauthrnd=make_password(42);
 require LoadAdminTemp('eSetDb.php');
 ?>

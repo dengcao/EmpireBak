@@ -8,12 +8,14 @@ $link=db_connect();
 $empire=new mysqlquery();
 $chars=Ebak_ReturnDbCharList('');
 //数据库列表
-$mydbname=$_GET['mydbname'];
+$mydbname=RepPostVar($_GET['mydbname']);
 $selectdbname=$phome_db_dbname;
 if($mydbname)
 {
 	$selectdbname=$mydbname;
 }
+Ebak_DoCkStrType(4,$mydbname,1);
+Ebak_DoCkStrType(4,$selectdbname,1);
 $db='';
 if($canlistdb)
 {

@@ -126,7 +126,7 @@ function check()
     </tr>
 	</table>
   <table width="100%" border="0" align="center" cellpadding="3" cellspacing="1" class="tableborder">
-  <form name="ebakchangetb" method="post" action="phomebak.php" onsubmit="return check();">
+  <form name="ebakchangetb" method="post" action="phomebak.php" onSubmit="return check();">
     <tr class="header"> 
       <td height="25">備份參數設置： 
         <input name="phome" type="hidden" id="phome" value="DoEbak">        <input name="mydbname" type="hidden" id="mydbname" value="<?=$mydbname?>">        </td>
@@ -135,14 +135,14 @@ function check()
       <td height="25" bgcolor="#FFFFFF"> <table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#DBEAF5">
           <tr> 
             <td width="22%">&nbsp;</td>
-            <td> [<a href="#ebak" onclick="javascript:window.open('ListSetbak.php?mydbname=<?=$mydbname?>&change=1','','width=550,height=380,scrollbars=yes');">導入設置</a>]&nbsp;&nbsp;&nbsp;[<a href="#ebak" onclick="javascript:showsave.style.display='';">保存設置</a>]&nbsp;&nbsp;&nbsp;[<a href="#ebak" onclick="javascript:showreptable.style.display='';">批量替換表名</a>]</td>
+            <td> [<a href="#ebak" onClick="javascript:window.open('ListSetbak.php?mydbname=<?=$mydbname?>&change=1','','width=550,height=380,scrollbars=yes');">導入設置</a>]&nbsp;&nbsp;&nbsp;[<a href="#ebak" onClick="javascript:showsave.style.display='';">保存設置</a>]&nbsp;&nbsp;&nbsp;[<a href="#ebak" onClick="javascript:showreptable.style.display='';">批量替換表名</a>]</td>
           </tr>
           <tr id="showsave" style="display:none">
             <td>&nbsp;</td>
-            <td>保存文件名:setsave/ 
-              <input name="savename" type="text" id="savename" value="<?=$_GET['savefilename']?>">
+            <td>保存文件名: <?=$baksetsavepath?>/ 
+              <input name="savename" type="text" id="savename" value="<?=RepPostVar($_GET['savefilename'])?>">
               <input name="Submit4" type="submit" id="Submit4" onClick="document.ebakchangetb.phome.value='DoSave';document.ebakchangetb.action='phome.php';" value="保存設置">
-              <font color="#666666">(文件名請用英文字母,如：test)</font></td>
+              <font color="#666666">(文件名可用英文字母和數字,如：test)</font></td>
           </tr>
 		  <tr id="showreptable" style="display:none">
             <td>&nbsp;</td>
@@ -191,7 +191,7 @@ function check()
             <td height="23"><input type="radio" name="bakdatatype" value="0"<?=$dbakdatatype==0?' checked':''?>>
               正常
               <input type="radio" name="bakdatatype" value="1"<?=$dbakdatatype==1?' checked':''?>>
-              十六進制方式<font color="#666666">(十六進制備份文件會佔用更多的空間)</font></td>
+              十六進制方式<font color="#666666">(十六進制備份文件會佔用更多的空間，但兼容性更好)</font></td>
           </tr>
           <tr> 
             <td>存放目錄</td>
@@ -200,7 +200,7 @@ function check()
               / 
               <input name="mypath" type="text" id="mypath" value="<?=$mypath?>" size="28"> 
               <font color="#666666"> 
-              <input type="button" name="Submit2" value="選擇目錄" onclick="javascript:window.open('ChangePath.php?change=1&toform=ebakchangetb','','width=750,height=500,scrollbars=yes');">
+              <input type="button" name="Submit2" value="選擇目錄" onClick="javascript:window.open('ChangePath.php?change=1&toform=ebakchangetb','','width=750,height=500,scrollbars=yes');">
               (目錄不存在，系統會自動建立)</font></td>
           </tr>
           <tr> 
@@ -234,11 +234,11 @@ function check()
       <td height="25">
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
           <tr>
-            <td width="50%"><font color="#FFFFFF">選擇要備份的表：( <a href="#ebak" onclick="SelectCheckAll(document.ebakchangetb)"><font color="#FFFFFF"><u>全選</u></font></a> 
-              | <a href="#ebak" onclick="reverseCheckAll(document.ebakchangetb);"><font color="#FFFFFF"><u>反選</u></font></a> )</font></td>
+            <td width="50%"><font color="#FFFFFF">選擇要備份的表：( <a href="#ebak" onClick="SelectCheckAll(document.ebakchangetb)"><font color="#FFFFFF"><u>全選</u></font></a> 
+              | <a href="#ebak" onClick="reverseCheckAll(document.ebakchangetb);"><font color="#FFFFFF"><u>反選</u></font></a> )</font></td>
             <td><div align="right"><font color="#FFFFFF">查詢: 
                 <input name="keyboard" type="text" id="keyboard" value="<?=$keyboard?>">
-                <input type="button" name="Submit32" value="顯示數據表" onclick="self.location.href='ChangeTable.php?sear=1&mydbname=<?=$mydbname?>&keyboard='+document.ebakchangetb.keyboard.value;">
+                <input type="button" name="Submit32" value="顯示數據表" onClick="self.location.href='ChangeTable.php?sear=1&mydbname=<?=$mydbname?>&keyboard='+document.ebakchangetb.keyboard.value;">
               </font></div></td>
           </tr>
         </table></td>
@@ -272,13 +272,13 @@ function check()
 		  $rownum=0;//總記錄數
 		  while($r=$empire->fetch($sql))
 		  {
-		  	$rownum+=$r[Rows];
+		  	$rownum+=$r['Rows'];
 		  	$tablenum++;
-		  	$datasize=$r[Data_length]+$r[Index_length];
-		  	$totaldatasize+=$r[Data_length]+$r[Index_length]+$r[Data_free];
+		  	$datasize=$r['Data_length']+$r['Index_length'];
+		  	$totaldatasize+=$r['Data_length']+$r['Index_length']+$r['Data_free'];
 			if($check==1)
 			{
-				if(strstr($dtblist,','.$r[Name].','))
+				if(strstr($dtblist,','.$r['Name'].','))
 				{
 					$tbchecked=' checked';
 				}
@@ -287,37 +287,37 @@ function check()
 					$tbchecked='';
 				}
 			}
-			$collation=$r[Collation]?$r[Collation]:'---';
+			$collation=$r['Collation']?$r['Collation']:'---';
 		  ?>
-          <tr id=tb<?=$r[Name]?>> 
+          <tr id=tb<?=$r['Name']?>> 
             <td height="23"> <div align="center"> 
-                <input name="tablename[]" type="checkbox" id="tablename[]" value="<?=$r[Name]?>" onclick="if(this.checked){tb<?=$r[Name]?>.style.backgroundColor='#F1F7FC';}else{tb<?=$r[Name]?>.style.backgroundColor='#ffffff';}"<?=$tbchecked?>>
+                <input name="tablename[]" type="checkbox" id="tablename[]" value="<?=$r['Name']?>" onClick="if(this.checked){tb<?=$r['Name']?>.style.backgroundColor='#F1F7FC';}else{tb<?=$r['Name']?>.style.backgroundColor='#ffffff';}"<?=$tbchecked?>>
               </div></td>
-            <td height="23"> <div align="left"><a href="#ebak" onclick="window.open('ListField.php?mydbname=<?=$mydbname?>&mytbname=<?=$r[Name]?>','','width=660,height=500,scrollbars=yes');" title="點擊查看表字段列表"> 
-                <?=$r[Name]?>
+            <td height="23"> <div align="left"><a href="#ebak" onClick="window.open('ListField.php?mydbname=<?=$mydbname?>&mytbname=<?=$r['Name']?>','','width=660,height=500,scrollbars=yes');" title="點擊查看表字段列表"> 
+                <?=$r['Name']?>
                 </a></div></td>
             <td height="23"> <div align="center">
-                <?=$r[Type]?$r[Type]:$r[Engine]?>
+                <?=$r['Type']?$r['Type']:$r['Engine']?>
               </div></td>
             <td><div align="center">
 				<?=$collation?>
               </div></td>
             <td height="23"> <div align="right">
-                <?=$r[Rows]?>
+                <?=$r['Rows']?>
               </div></td>
             <td height="23"> <div align="right">
                 <?=Ebak_ChangeSize($datasize)?>
               </div></td>
             <td height="23"> <div align="right">
-                <?=Ebak_ChangeSize($r[Data_free])?>
+                <?=Ebak_ChangeSize($r['Data_free'])?>
               </div></td>
           </tr>
-          <?
+          <?php
 		  }
 		  ?>
           <tr bgcolor="#DBEAF5"> 
             <td height="23"> <div align="center">
-                <input type=checkbox name=chkall value=on onclick="CheckAll(this.form)"<?=$check==0?' checked':''?>>
+                <input type=checkbox name=chkall value=on onClick="CheckAll(this.form)"<?=$check==0?' checked':''?>>
               </div></td>
             <td height="23"> <div align="center"> 
                 <?=$tablenum?>
@@ -336,15 +336,21 @@ function check()
     <tr class="header"> 
       <td height="25">
 <div align="center">
-          <input type="submit" name="Submit" value="開始備份" onclick="document.ebakchangetb.phome.value='DoEbak';document.ebakchangetb.action='phomebak.php';">
-          &nbsp;&nbsp; &nbsp;&nbsp;
-          <input type="submit" name="Submit2" value="修復數據表" onclick="document.ebakchangetb.phome.value='DoRep';document.ebakchangetb.action='phome.php';">
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr>
+          <td width="50%"><input type="submit" name="Submit" value="開始備份" onClick="document.ebakchangetb.phome.value='DoEbak';document.ebakchangetb.action='phomebak.php';"></td>
+          <td><div align="right">&nbsp;&nbsp; &nbsp;&nbsp;
+          <input type="submit" name="Submit2" value="修復數據表" onClick="document.ebakchangetb.phome.value='DoRep';document.ebakchangetb.action='phome.php';">
           &nbsp;&nbsp; &nbsp;&nbsp; 
-          <input type="submit" name="Submit22" value="優化數據表" onclick="document.ebakchangetb.phome.value='DoOpi';document.ebakchangetb.action='phome.php';">
-        &nbsp;&nbsp; &nbsp;&nbsp; 
-          <input type="submit" name="Submit22" value="刪除數據表" onclick="document.ebakchangetb.phome.value='DoDrop';document.ebakchangetb.action='phome.php';">
+          <input type="submit" name="Submit22" value="刪除數據表" onClick="document.ebakchangetb.phome.value='DoDrop';document.ebakchangetb.action='phome.php';">
 		&nbsp;&nbsp; &nbsp;&nbsp; 
-          <input type="submit" name="Submit22" value="清空數據表" onclick="document.ebakchangetb.phome.value='EmptyTable';document.ebakchangetb.action='phome.php';">
+          <input type="submit" name="Submit22" value="清空數據表" onClick="document.ebakchangetb.phome.value='EmptyTable';document.ebakchangetb.action='phome.php';">
+		  &nbsp;&nbsp; &nbsp;&nbsp; 
+		  <input type="submit" name="Submit22" value="優化數據表" onClick="document.ebakchangetb.phome.value='DoOpi';document.ebakchangetb.action='phome.php';">
+		   &nbsp;&nbsp; &nbsp;&nbsp; 
+		</div></td>
+		</tr>
+		</table>
 		</div></td>
     </tr>
 	</form>

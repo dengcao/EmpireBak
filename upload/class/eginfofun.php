@@ -272,7 +272,7 @@ function EGInfo_ReturnDomain(){
 	{
 		return '';
 	}
-	return 'http://'.$domain;
+	return (Ebak_eCheckUseHttps()==1?'https://':'http://').$domain;
 }
 
 //取得当前网页目录

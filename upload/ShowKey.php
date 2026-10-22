@@ -16,6 +16,7 @@ function domake_password($pw_length){
 		{
 			mt_srand((double)microtime()*1000000);
 		}
+		mt_srand();
 		$randnum=mt_rand($low_ascii_bound,$upper_ascii_bound);
 		if(!in_array($randnum,$notuse))
 		{

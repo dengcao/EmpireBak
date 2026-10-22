@@ -1,0 +1,26 @@
+<?php
+require('class/connect.php');
+require('class/functions.php');
+require LoadLang('f.php');
+$phome=$_GET['phome'];
+if(empty($phome))
+{$phome=$_POST['phome'];}
+//µÇÂ½
+if($phome=="ChangeLanguage")
+{}
+else
+{
+	$lur=islogin();
+	$loginin=$lur['username'];
+	$rnd=$lur['rnd'];
+}
+
+if($phome=="ChangeLanguage")//Ñ¡ÔñÓïÑÔ
+{
+	Ebak_ChangeLanguage($_GET);
+}
+else
+{
+	printerror("ErrorUrl","history.go(-1)");
+}
+?>

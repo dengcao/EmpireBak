@@ -8,6 +8,10 @@ if(empty($phome))
 $lur=islogin();
 $loginin=$lur['username'];
 $rnd=$lur['rnd'];
+
+//mod
+Ebak_ehCheckCloseMods($phome);
+
 $link=db_connect();
 $empire=new mysqlquery();
 if($phome=="DoEbak")//初使化备份表

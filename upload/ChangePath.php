@@ -8,7 +8,8 @@ $hand=@opendir($bakpath);
 $form='ebakredata';
 if($_GET['toform'])
 {
-	$form=$_GET['toform'];
+	$form=RepPostVar($_GET['toform']);
 }
+eCheckStrType(5,$form,1);
 require LoadAdminTemp('eChangePath.php');
 ?>

@@ -21,7 +21,10 @@ function do_dbconnect($dbhost,$dbport,$dbusername,$dbpassword,$dbname=''){
 	{
 		//±‡¬Î
 		//DoSetDbChar($phome_db_char);
-		@mysqli_query($dblink,'set character_set_connection='.$phome_db_char.',character_set_results='.$phome_db_char.',character_set_client=binary;');
+		if($phome_db_char)
+		{
+			@mysqli_query($dblink,'set character_set_connection='.$phome_db_char.',character_set_results='.$phome_db_char.',character_set_client=binary;');
+		}
 		if($phome_db_ver>='5.0')
 		{
 			@mysqli_query($dblink,"SET sql_mode=''");
@@ -44,6 +47,10 @@ function do_dbclose(){
 
 //…Ë÷√±‡¬Î
 function do_DoSetDbChar($dbchar){
+	if(!$dbchar)
+	{
+		return '';
+	}
 	@mysqli_query(return_dblink(),'set character_set_connection='.$dbchar.',character_set_results='.$dbchar.',character_set_client=binary;');
 }
 

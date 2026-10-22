@@ -28,7 +28,7 @@ function Ebak_CheckConnectDbServer($add,$ecms=0){
 	$dbport=$add['checkdbport'];
 	$dbuser=$add['checkdbuser'];
 	$dbpass=$add['checkdbpass'];
-	$dbname=$add['checkdbname'];
+	$dbname=RepPostVar($add['checkdbname']);
 	$dbtbpre=$add['checkdbtbpre'];
 	$dbchar=$add['checkdbchar'];
 	$serverid=(int)$serverid;
@@ -68,6 +68,7 @@ function Ebak_CheckConnectDbServer($add,$ecms=0){
 	//默认数据库
 	if($dbname)
 	{
+		Ebak_DoCkStrType(4,$dbname,1);
 		$usedb=do_dbquery_common("use `".$dbname."`");
 		if(!$usedb)
 		{
@@ -102,6 +103,7 @@ function Ebak_ReturnUpdateMoreDbServer($add){
 	//集合
 	$rexp='|ebak|';
 	$fexp='!ebak!';
+	$mdbver=eCheckEmptyArray($mdbver);
 	$count=count($mdbver);
 	if(!$count)
 	{
@@ -115,6 +117,7 @@ function Ebak_ReturnUpdateMoreDbServer($add){
 		{
 			continue;
 		}
+		$mdbname[$i]=RepPostVar($mdbname[$i]);
 		$alldbserver.=$addrexp.$mdbver[$i].$fexp.$mdbhost[$i].$fexp.$mdbport[$i].$fexp.$mdbuser[$i].$fexp.$mdbpass[$i].$fexp.$mdbname[$i].$fexp.$mdbtbpre[$i].$fexp.$mdbchar[$i];
 		$addrexp=$rexp;
 	}
@@ -123,7 +126,7 @@ function Ebak_ReturnUpdateMoreDbServer($add){
 
 //返回随机字符
 function Ebak_CkrndReturnVar($post){
-	global $ebak_set_ckrndvar,$ebak_set_ckrndval,$ebak_set_ckrndvaltwo,$ebak_set_ckrndvalthree,$ebak_set_ckrndvalfour,$set_username,$set_loginrnd,$phome_cookievarpre;
+	global $ebak_set_ckrndvar,$ebak_set_ckrndval,$ebak_set_ckrndvaltwo,$ebak_set_ckrndvalthree,$ebak_set_ckrndvalfour,$ebak_set_ckrndvalfive,$ebak_set_ckrndvalsix,$set_username,$set_loginrnd,$phome_cookievarpre;
 	$changernd=0;
 	if($post['adminpassword'])
 	{
@@ -144,10 +147,12 @@ function Ebak_CkrndReturnVar($post){
 	if($changernd)
 	{
 		$r['ckrndvar']=strtolower(make_password_zm(12));
-		$r['ckrndval']=md5(md5(make_password(25)));
-		$r['ckrndvaltwo']=md5(md5(make_password(20)));
-		$r['ckrndvalthree']=md5(md5(make_password(18)));
-		$r['ckrndvalfour']=md5(md5(make_password(16)));
+		$r['ckrndval']=md5(md5(make_password(Ebak_RandInt(32,46))));
+		$r['ckrndvaltwo']=md5(md5(make_password(Ebak_RandInt(30,40))));
+		$r['ckrndvalthree']=md5(md5(make_password(Ebak_RandInt(20,36))));
+		$r['ckrndvalfour']=md5(md5(make_password(Ebak_RandInt(18,32))));
+		$r['ckrndvalfive']=md5(md5(make_password(Ebak_RandInt(50,80))));
+		$r['ckrndvalsix']=md5(md5(make_password(Ebak_RandInt(42,56))));
 	}
 	else
 	{
@@ -156,13 +161,15 @@ function Ebak_CkrndReturnVar($post){
 		$r['ckrndvaltwo']=$ebak_set_ckrndvaltwo;
 		$r['ckrndvalthree']=$ebak_set_ckrndvalthree;
 		$r['ckrndvalfour']=$ebak_set_ckrndvalfour;
+		$r['ckrndvalfive']=$ebak_set_ckrndvalfive;
+		$r['ckrndvalsix']=$ebak_set_ckrndvalsix;
 	}
 	return $r;
 }
 
 //参数设置
 function Ebak_SetDb($add){
-	global $phome_db_password,$set_password,$phome_db_dbname,$link,$empire,$defphome_db_password;
+	global $phome_db_password,$set_password,$phome_db_dbname,$link,$empire,$defphome_db_password,$ebak_set_hclosemods,$ebak_set_webdebug,$ebak_set_ckstrtype,$ebak_set_timezone;
 	//验证是否使用默认密码与默认验证随机码
 	Ebak_CheckIsDefPass($add);
 	$addrnd_r=Ebak_CkrndReturnVar($_POST);
@@ -198,6 +205,7 @@ function Ebak_SetDb($add){
 	//默认数据库
 	if($add['dbname'])
 	{
+		Ebak_DoCkStrType(4,$add['dbname'],1);
 		if($add['dbname']!=$phome_db_dbname)
 		{
 			$usedb=do_dbquery_common("use `".$add['dbname']."`");
@@ -235,6 +243,10 @@ function Ebak_SetDb($add){
 	{
 		$add['sbakpath']="bdata";
 	}
+	if(!eCheckStrType(5,$add['sbakpath'],0))
+	{
+		printerror("NotBakpath","history.go(-1)");
+	}
 	if(!file_exists(RepPathStr($add['sbakpath'])))
 	{
 		printerror("NotBakpath","history.go(-1)");
@@ -243,9 +255,25 @@ function Ebak_SetDb($add){
 	{
 		$add['sbakzippath']="zip";
 	}
+	if(!eCheckStrType(5,$add['sbakzippath'],0))
+	{
+		printerror("NotZippath","history.go(-1)");
+	}
 	if(!file_exists(RepPathStr($add['sbakzippath'])))
 	{
 		printerror("NotZippath","history.go(-1)");
+	}
+	if(empty($add['sbaksetsavepath']))
+	{
+		$add['sbaksetsavepath']="setsave";
+	}
+	if(!eCheckStrType(5,$add['sbaksetsavepath'],0))
+	{
+		printerror("NotBakSetsavepath","history.go(-1)");
+	}
+	if(!file_exists(RepPathStr($add['sbaksetsavepath'])))
+	{
+		printerror("NotBakSetsavepath","history.go(-1)");
 	}
 	//COOKIE前缀
 	if($add['ckvarpre']=='ebak_')
@@ -257,7 +285,7 @@ function Ebak_SetDb($add){
 	$moredbservers=Ebak_ReturnUpdateMoreDbServer($add);
 	if(empty($add['sebaklang']))
 	{
-		$add['sebaklang']='gb,gbk';
+		$add['sebaklang']='gbutf8,utf-8';
 	}
 	$langr=explode(',',$add['sebaklang']);
 	$string="<?php
@@ -287,6 +315,10 @@ define('EmpireBakConfig',TRUE);
 \$set_loginkey='".addslashes($add['loginkey'])."';
 \$ebak_set_keytime=".intval($add['keytime']).";
 \$ebak_set_ckuseragent='".addslashes($add['ckuseragent'])."';
+\$ebak_set_loginurlcsvar='".addslashes($add['loginurlcsvar'])."';
+\$ebak_set_loginurlcsval='".addslashes($add['loginurlcsval'])."';
+\$ebak_set_filerndtime=".intval($add['filerndtime']).";
+\$ebak_set_filerndctime=".intval($add['filerndctime']).";
 
 //COOKIE
 \$phome_cookiedomain='".addslashes($add['ckdomain'])."';
@@ -301,6 +333,7 @@ define('EmpireBakConfig',TRUE);
 //BAK
 \$bakpath='".addslashes($add['sbakpath'])."';
 \$bakzippath='".addslashes($add['sbakzippath'])."';
+\$baksetsavepath='".addslashes($add['sbaksetsavepath'])."';
 \$filechmod='".addslashes($add['sfilechmod'])."';
 \$phpsafemod='".addslashes($add['sphpsafemod'])."';
 \$php_outtime='".addslashes($add['sphp_outtime'])."';
@@ -309,6 +342,7 @@ define('EmpireBakConfig',TRUE);
 \$ebak_set_moredbserver='".addslashes($moredbservers)."';
 \$ebak_set_hidedbs='".addslashes($add['shidedbs'])."';
 \$ebak_set_escapetype='".addslashes($add['sescapetype'])."';
+\$ebak_set_dbtbtype=".intval($add['sdbtbtype']).";
 
 //EBMA
 \$ebak_ebma_open=".intval($add['ebmaopen']).";
@@ -321,6 +355,12 @@ define('EmpireBakConfig',TRUE);
 \$ebak_set_ckrndvaltwo='".addslashes($addrnd_r['ckrndvaltwo'])."';
 \$ebak_set_ckrndvalthree='".addslashes($addrnd_r['ckrndvalthree'])."';
 \$ebak_set_ckrndvalfour='".addslashes($addrnd_r['ckrndvalfour'])."';
+\$ebak_set_ckrndvalfive='".addslashes($addrnd_r['ckrndvalfive'])."';
+\$ebak_set_ckrndvalsix='".addslashes($addrnd_r['ckrndvalsix'])."';
+\$ebak_set_hclosemods='".addslashes($ebak_set_hclosemods)."';
+\$ebak_set_webdebug=".intval($ebak_set_webdebug).";
+\$ebak_set_ckstrtype=".intval($ebak_set_ckstrtype).";
+\$ebak_set_timezone='".addslashes($ebak_set_timezone)."';
 
 //------------ SYSTEM ------------
 HeaderIeChar();
@@ -334,7 +374,9 @@ HeaderIeChar();
 function Ebak_Rep($tablename,$dbname){
 	global $empire;
 	$dbname=RepPostVar($dbname);
+	Ebak_DoCkStrType(4,$dbname,1);
 	$empire->query("use `$dbname`");
+	$tablename=eCheckEmptyArray($tablename);
 	$count=count($tablename);
 	if(empty($count))
 	{
@@ -342,6 +384,10 @@ function Ebak_Rep($tablename,$dbname){
 	}
 	for($i=0;$i<$count;$i++)
 	{
+		if(Ebak_DoCkStrType(4,$tablename[$i],0)<1)
+		{
+			continue;
+		}
 		$sql1=$empire->query("REPAIR TABLE `$tablename[$i]`;");
     }
 	printerror("RepairTbSuccess","ChangeTable.php?mydbname=$dbname");
@@ -351,7 +397,9 @@ function Ebak_Rep($tablename,$dbname){
 function Ebak_Opi($tablename,$dbname){
 	global $empire;
 	$dbname=RepPostVar($dbname);
+	Ebak_DoCkStrType(4,$dbname,1);
 	$empire->query("use `$dbname`");
+	$tablename=eCheckEmptyArray($tablename);
 	$count=count($tablename);
 	if(empty($count))
 	{
@@ -359,6 +407,10 @@ function Ebak_Opi($tablename,$dbname){
 	}
 	for($i=0;$i<$count;$i++)
 	{
+		if(Ebak_DoCkStrType(4,$tablename[$i],0)<1)
+		{
+			continue;
+		}
 		$sql1=$empire->query("OPTIMIZE TABLE `$tablename[$i]`;");
     }
 	printerror("OptimizeTbSuccess","ChangeTable.php?mydbname=$dbname");
@@ -368,7 +420,9 @@ function Ebak_Opi($tablename,$dbname){
 function Ebak_Drop($tablename,$dbname){
 	global $empire;
 	$dbname=RepPostVar($dbname);
+	Ebak_DoCkStrType(4,$dbname,1);
 	$empire->query("use `$dbname`");
+	$tablename=eCheckEmptyArray($tablename);
 	$count=count($tablename);
 	if(empty($count))
 	{printerror("EmptyChangeDelTb","history.go(-1)");}
@@ -376,6 +430,7 @@ function Ebak_Drop($tablename,$dbname){
 	$first=1;
 	for($i=0;$i<$count;$i++)
 	{
+		Ebak_DoCkStrType(4,$tablename[$i],1);
 		if(empty($first))
 		{
 			$a.=",";
@@ -398,6 +453,7 @@ function Ebak_DropDb($dbname){
 	{
 		printerror("NotChangeDelDb","history.go(-1)");
 	}
+	Ebak_DoCkStrType(4,$dbname,1);
 	$sql=$empire->query("DROP DATABASE `$dbname`");
 	if($sql)
 	{
@@ -415,6 +471,8 @@ function Ebak_CreatDb($dbname,$dbchar=''){
 	{
 		printerror("EmptyDbname","history.go(-1)");
 	}
+	Ebak_DoCkStrType(4,$dbname,1);
+	Ebak_DoCkStrType(4,$dbchar,1);
 	$a="";
 	if($dbchar&&$phome_db_ver>='4.1')
 	{
@@ -433,12 +491,18 @@ function Ebak_CreatDb($dbname,$dbchar=''){
 function Ebak_EmptyTable($tablename,$dbname){
 	global $empire;
 	$dbname=RepPostVar($dbname);
+	Ebak_DoCkStrType(4,$dbname,1);
 	$empire->query("use `$dbname`");
+	$tablename=eCheckEmptyArray($tablename);
 	$count=count($tablename);
 	if(empty($count))
 	{printerror("EmptyChangeTb","history.go(-1)");}
 	for($i=0;$i<$count;$i++)
 	{
+		if(Ebak_DoCkStrType(4,$tablename[$i],0)<1)
+		{
+			continue;
+		}
 		$sql1=$empire->query("TRUNCATE `".$tablename[$i]."`;");
     }
 	printerror("TruncateTbSuccess","ChangeTable.php?mydbname=$dbname");
@@ -452,7 +516,9 @@ function Ebak_ReplaceTable($tablename,$oldpre,$newpre,$dbname){
 		printerror("EmptyReplaceTablePre","history.go(-1)");
 	}
 	$dbname=RepPostVar($dbname);
+	Ebak_DoCkStrType(4,$dbname,1);
 	$empire->query("use `$dbname`");
+	$tablename=eCheckEmptyArray($tablename);
 	$count=count($tablename);
 	if(empty($count))
 	{
@@ -460,7 +526,15 @@ function Ebak_ReplaceTable($tablename,$oldpre,$newpre,$dbname){
 	}
 	for($i=0;$i<$count;$i++)
 	{
+		if(Ebak_DoCkStrType(4,$tablename[$i],0)<1)
+		{
+			continue;
+		}
 		$newtbname=str_replace($oldpre,$newpre,$tablename[$i]);
+		if(Ebak_DoCkStrType(4,$newtbname,0)<1)
+		{
+			continue;
+		}
 		$empire->query("ALTER TABLE `".$tablename[$i]."` RENAME `".$newtbname."`;");
     }
 	printerror("ReplaceTbSuccess","ChangeTable.php?mydbname=$dbname");
@@ -468,11 +542,13 @@ function Ebak_ReplaceTable($tablename,$oldpre,$newpre,$dbname){
 
 //保存设置
 function Ebak_SaveSeting($add){
+	global $baksetsavepath;
 	$savename=$add['savename'];
 	if(strstr($savename,'.')||strstr($savename,'/')||strstr($savename,"\\"))
 	{
 		printerror("FailSetSavename","history.go(-1)");
 	}
+	eCheckStrType(5,$savename,1);
 	$baktype=(int)$add['baktype'];
 	$filesize=(int)$add['filesize'];
 	$bakline=(int)$add['bakline'];
@@ -485,11 +561,16 @@ function Ebak_SaveSeting($add){
 	//表列表
 	$tblist="";
 	$tablename=$add['tablename'];
+	$tablename=eCheckEmptyArray($tablename);
 	$count=count($tablename);
 	if($count)
 	{
 		for($i=0;$i<$count;$i++)
 		{
+			if(Ebak_DoCkStrType(4,$tablename[$i],0)<1)
+			{
+				continue;
+			}
 			$tblist.=$tablename[$i].",";
 		}
 		$tblist=",".$tblist;
@@ -503,7 +584,7 @@ function Ebak_SaveSeting($add){
 \$dbakstrufour=".$bakstrufour.";
 \$ddbchar='".addslashes($add['dbchar'])."';
 \$dmypath='".addslashes($add['mypath'])."';
-\$dreadme=\"".addslashes(stripSlashes($add['readme']))."\";
+\$dreadme='".addslashes(stripSlashes($add['readme']))."';
 \$dautofield='".addslashes($add['autofield'])."';
 \$dtblist='".addslashes($tblist)."';
 \$dbeover=".$beover.";
@@ -513,21 +594,23 @@ function Ebak_SaveSeting($add){
 \$dwaitbaktime='".$add['waitbaktime']."';
 \$dbakdatatype=".$bakdatatype.";
 ?>";
-	$file="setsave/".$savename;
+	$file=$baksetsavepath."/".$savename;
 	WriteFiletext_n($file,$str);
 	printerror("SetSaveSuccess","history.go(-1)");
 }
 
 //删除设置
 function Ebak_DelSeting($add){
+	global $baksetsavepath;
 	$savename=$add['savename'];
 	if(strstr($savename,'.')||strstr($savename,'/')||strstr($savename,"\\"))
 	{
 		printerror("FailSetSavename","history.go(-1)");
 	}
-	$file="setsave/".$savename;
+	eCheckStrType(5,$savename,1);
+	$file=$baksetsavepath."/".$savename;
 	DelFiletext($file);
-	printerror("DelSaveSetSuccess","ListSetbak.php?mydbname=$add[mydbname]&change=$add[change]");
+	printerror("DelSaveSetSuccess","ListSetbak.php?mydbname=".RepPostVar($add['mydbname'])."&change=".RepPostVar($add['change']));
 }
 
 //删除备份目录
@@ -537,13 +620,14 @@ function Ebak_DelBakpath($path){
 	{printerror("NotChangeDelPath","history.go(-1)");}
 	if(!trim($path))
 	{printerror("NotChangeDelPath","history.go(-1)");}
+	eCheckStrType(5,$path,1);
 	$delpath=$bakpath."/".$path;
 	if(!file_exists($delpath))
 	{
 		printerror("DelPathNotExists","history.go(-1)");
     }
 	$delpath=DelPath($delpath);
-	printerror("DelPathSuccess","ChangePath.php?change=".$_GET['change']);
+	printerror("DelPathSuccess","ChangePath.php?change=".RepPostVar($_GET['change']));
 }
 
 //删除压缩包
@@ -555,6 +639,7 @@ function Ebak_DelZip($file){
 	{
 		printerror("FileNotExists","history.go(-1)",9);
     }
+	eCheckStrType(5,$file,1);
 	$filename=$bakzippath."/".$file;
 	if(!file_exists($filename))
 	{
@@ -575,11 +660,13 @@ function Ebak_DoExecSql($add){
 	//数据库
 	if($add['mydbname'])
 	{
+		Ebak_DoCkStrType(4,$add['mydbname'],1);
 		$empire->query("use `".$add['mydbname']."`");
 	}
 	//编码
 	if($add['mydbchar'])
 	{
+		Ebak_DoCkStrType(4,$add['mydbchar'],1);
 		DoSetDbChar($add['mydbchar']);
 	}
 	$query=Ebak_ClearAddsData($query);
@@ -600,7 +687,7 @@ function Ebak_DoTranExecSql($file,$file_name,$file_type,$file_size,$add){
 		printerror("NotTranSQLFile","history.go(-1)");
 	}
 	//上传文件
-	$newfile='tmp/uploadsql'.time().'.sql';
+	$newfile='tmp/etmpup/uploadsql'.time().make_password(18).'.sql';
 	$cp=Ebak_DoTranFile($file,$newfile);
 	if(empty($cp))
 	{
@@ -615,11 +702,13 @@ function Ebak_DoTranExecSql($file,$file_name,$file_type,$file_size,$add){
 	//数据库
 	if($add['mydbname'])
 	{
+		Ebak_DoCkStrType(4,$add['mydbname'],1);
 		$empire->query("use `".$add['mydbname']."`");
 	}
 	//编码
 	if($add['mydbchar'])
 	{
+		Ebak_DoCkStrType(4,$add['mydbchar'],1);
 		DoSetDbChar($add['mydbchar']);
 	}
 	Ebak_DoRunQuery($query,$add['mydbchar'],$phome_db_ver);
@@ -641,6 +730,7 @@ function Ebak_RepPathFiletext($add){
 	{
 		printerror("NotChangeRepPathFiletext","history.go(-1)");
 	}
+	eCheckStrType(5,$mypath,1);
 	$path=$bakpath."/".$mypath;
 	if(!file_exists($path))
 	{

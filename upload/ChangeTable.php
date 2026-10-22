@@ -37,6 +37,7 @@ if(empty($mydbname))
 {
 	printerror("NotChangeDb","history.go(-1)");
 }
+Ebak_DoCkStrType(4,$mydbname,1);
 //选择数据库
 $udb=$empire->query("use `".$mydbname."`");
 //存放目录
@@ -55,7 +56,8 @@ if(empty($loadfile))
 {
 	$loadfile='def';
 }
-$loadfile='setsave/'.$loadfile;
+eCheckStrType(5,$loadfile,1);
+$loadfile=$baksetsavepath.'/'.$loadfile;
 @include($loadfile);
 if($dmypath)
 {
@@ -71,6 +73,7 @@ if(empty($keyboard))
 		$keyboard=$baktbpre;
 	}
 }
+Ebak_DoCkStrType(4,$keyboard,1);
 $and="";
 if($keyboard)
 {

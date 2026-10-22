@@ -5,20 +5,19 @@ require LoadLang('f.php');
 $phome=$_GET['phome'];
 if(empty($phome))
 {$phome=$_POST['phome'];}
-//登陆
-if($phome=="login"||$phome=="ChangeLanguage")
-{}
-else
-{
-	$lur=islogin();
-	$loginin=$lur['username'];
-	$rnd=$lur['rnd'];
-}
+//验证登录
+$lur=islogin();
+$loginin=$lur['username'];
+$rnd=$lur['rnd'];
+
+//mod
+Ebak_ehCheckCloseMods($phome);
+
 if($phome=="SetDb"||$phome=="DoRep"||$phome=="DoOpi"||$phome=="DoDrop"||$phome=="DropDb"||$phome=="CreateDb"||$phome=="EmptyTable"||$phome=="DoSave"||$phome=="DoDelSave"||$phome=="DelBakpath"||$phome=="DelZip"||$phome=="DoExecSql"||$phome=="DoTranExecSql"||$phome=="RepPathFiletext"||$phome=='ReplaceTable'||$phome=='CheckConnectDbServer'||$phome=='ChangeDbServer')
 {
 	include("class/combakfun.php");
 }
-if($phome=="SetDb"||$phome=="login"||$phome=="exit"||$phome=="ChangeLanguage"||$phome=="ChangeDbServer"||$phome=='CheckConnectDbServer')
+if($phome=="SetDb"||$phome=="exit"||$phome=="ChangeDbServer"||$phome=='CheckConnectDbServer')
 {}
 else
 {
@@ -74,14 +73,7 @@ elseif($phome=="EmptyTable")//清空表
 }
 elseif($phome=="exit")//退出系统
 {
-	LoginOut();
-}
-elseif($phome=="login")//登陆
-{
-	$lusername=$_POST['lusername'];
-	$lpassword=$_POST['lpassword'];
-	$key=$_POST['key'];
-	login($lusername,$lpassword,$key,$lifetime);
+	LoginOut($loginin,$rnd);
 }
 elseif($phome=="DelBakpath")//删除备份目录
 {
@@ -127,10 +119,6 @@ elseif($phome=="PathGotoRedata")//目录转向
 {
 	$mypath=$_GET['mypath'];
 	Ebak_PathGotoRedata($mypath);
-}
-elseif($phome=="ChangeLanguage")//选择语言
-{
-	Ebak_ChangeLanguage($_GET);
 }
 elseif($phome=="RepPathFiletext")//替换目录文件
 {

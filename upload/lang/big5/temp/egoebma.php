@@ -33,7 +33,7 @@ $pmaurl='eapi/'.$ebak_ebma_path.'/';
 <table width="100%" border="0" align="center" cellpadding="3" cellspacing="1">
   <tr> 
     <td>竚<a href="goebma.php">EBMA╰参MYSQL恨瞶㎝称╰参</a></td>
-    <td width="50%"><div align="right">EBMA╰参﹛よ呼<a href="http://ebak.phome.net" target="_blank">http://ebak.phome.net</a>&nbsp;&nbsp;</div></td>
+    <td width="50%"><div align="right">EBMA╰参﹛よ呼<a href="http://www.phome.net/EmpireBak/" target="_blank">http://www.phome.net/EmpireBak/</a>&nbsp;&nbsp;</div></td>
   </tr>
 </table>
 <br>
@@ -102,7 +102,7 @@ $pmaurl='eapi/'.$ebak_ebma_path.'/';
 <br>
 <table width="420" border="0" align="center" cellpadding="3" cellspacing="1">
   <tr>
-    <td height="38"><div align="center">Powered by <a href="http://ebak.phome.net" target="_blank"><strong>EBMA</strong></a></div></td>
+    <td height="38"><div align="center">Powered by <a href="http://www.phome.net/EmpireBak/" target="_blank"><strong>EBMA</strong></a></div></td>
   </tr>
 </table>
 </body>

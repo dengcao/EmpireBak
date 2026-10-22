@@ -26,7 +26,7 @@ if(!defined('InEmpireBak'))
     </tr>
     <tr> 
       <td height="25" bgcolor="#FFFFFF"><div align="center"> 
-          <table width="560" border="0" cellpadding="3" cellspacing="1">
+          <table width="650" border="0" cellpadding="3" cellspacing="1">
             <tr>
               <td width="50%">數據庫： 
                 <select name="mydbname" id="mydbname">
@@ -75,7 +75,7 @@ if(!defined('InEmpireBak'))
     </tr>
     <tr> 
       <td height="25" bgcolor="#FFFFFF"><div align="center"> 
-          <table width="560" border="0" cellpadding="3" cellspacing="1">
+          <table width="650" border="0" cellpadding="3" cellspacing="1">
             <tr> 
               <td width="50%">數據庫： 
                 <select name="mydbname" id="mydbname">
